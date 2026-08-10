@@ -47,6 +47,11 @@ class City(models.Model):
         verbose_name='Achaar Sanhita Active',
         help_text='Jab True ho, posting disabled ho jati hai (Election ke dauran)',
     )
+    is_emergency_rule_active = models.BooleanField(
+        default=False,
+        verbose_name='Emergency Rule Active',
+        help_text='Jab True ho, system fully locked (No posts, no new users, no mohalla changes)',
+    )
 
     class Meta:
         db_table = 'ecosystem_city'

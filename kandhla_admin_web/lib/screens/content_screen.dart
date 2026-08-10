@@ -12,11 +12,38 @@ class ContentScreen extends StatefulWidget {
 class _ContentScreenState extends State<ContentScreen> {
   bool _isEmergencyRule = false;
 
-  void _toggleEmergencyRule(bool value) {
+  List<dynamic> _posts = [];
+  bool _isLoading = true;
+
+  @override
+  void initState() {
+    super.initState();
+    _fetchPosts();
+  }
+
+  Future<void> _fetchPosts() async {
+    setState(() => _isLoading = true);
+    final data = await ApiService.getPosts();
+    if (data['success'] == true) {
+      setState(() {
+        _posts = data['posts'];
+        _isLoading = false;
+      });
+    } else {
+      setState(() => _isLoading = false);
+    }
+  }
+
+  void _deletePost(String postId) async {
+    await ApiService.deletePost(postId);
+    _fetchPosts();
+  }
+
+  void _toggleEmergencyRule(bool value) async {
+    await ApiService.toggleEmergencyRule(value);
     setState(() {
       _isEmergencyRule = value;
     });
-    // Implement API Call to backend to toggle Emergency Rule
     ScaffoldMessenger.of(context).showSnackBar(
       SnackBar(
         content: Text(value ? '🚨 EMERGENCY RULE IMPOSED! App locked.' : '✅ Emergency Rule Lifted.'),
@@ -63,10 +90,13 @@ class _ContentScreenState extends State<ContentScreen> {
           const SizedBox(height: 16),
           const Text('Manage all user posts, delete inappropriate content, and oversee the city feed.', style: TextStyle(color: Colors.white70)),
           const SizedBox(height: 24),
-          Expanded(
+          _isLoading 
+            ? const CircularProgressIndicator()
+            : Expanded(
             child: ListView.builder(
-              itemCount: 5, // Mock data
+              itemCount: _posts.length,
               itemBuilder: (context, index) {
+                final post = _posts[index];
                 return Card(
                   color: Colors.white10,
                   margin: const EdgeInsets.only(bottom: 12),
@@ -79,23 +109,23 @@ class _ContentScreenState extends State<ContentScreen> {
                           children: [
                             const CircleAvatar(backgroundColor: Colors.blueGrey, child: Icon(Icons.person)),
                             const SizedBox(width: 12),
-                            const Column(
+                            Column(
                               crossAxisAlignment: CrossAxisAlignment.start,
                               children: [
-                                Text('Citizen Name', style: TextStyle(fontWeight: FontWeight.bold)),
-                                Text('Mohalla North • 2 hrs ago', style: TextStyle(fontSize: 12, color: Colors.white54)),
+                                Text(post['author'], style: const TextStyle(fontWeight: FontWeight.bold)),
+                                Text('Type: ${post['type']}', style: const TextStyle(fontSize: 12, color: Colors.white54)),
                               ],
                             ),
                             const Spacer(),
                             IconButton(
                               icon: const Icon(Icons.delete, color: Colors.redAccent),
-                              onPressed: () {},
+                              onPressed: () => _deletePost(post['id']),
                               tooltip: 'Delete Post',
                             ),
                           ],
                         ),
                         const SizedBox(height: 12),
-                        const Text('This is a mock post content representing what users share in the app. Admins can moderate this directly.'),
+                        Text(post['content'] ?? ''),
                       ],
                     ),
                   ),

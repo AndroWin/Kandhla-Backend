@@ -97,17 +97,35 @@ class ApiService {
     return {'success': false, 'error': 'Failed to push ad'};
   }
 
-  static Future<Map<String, dynamic>> declareElection(String level) async {
+  static Future<Map<String, dynamic>> declareElection(String level, {bool? achaarSanhita}) async {
     try {
+      final body = {'level': level};
+      if (achaarSanhita != null) {
+        body['achaar_sanhita'] = achaarSanhita;
+      }
       final response = await http.post(
         Uri.parse('$baseUrl/elections/'),
         headers: {'Content-Type': 'application/json'},
-        body: json.encode({'level': level}),
+        body: json.encode(body),
       );
       return json.decode(response.body);
     } catch (e) {
       print('Error initializing election: $e');
     }
     return {'success': false, 'error': 'Failed to initialize election'};
+  }
+
+  static Future<Map<String, dynamic>> toggleEmergencyRule(bool isActive) async {
+    try {
+      final response = await http.post(
+        Uri.parse('$baseUrl/content/'),
+        headers: {'Content-Type': 'application/json'},
+        body: json.encode({'emergency_rule': isActive}),
+      );
+      return json.decode(response.body);
+    } catch (e) {
+      print('Error updating emergency rule: $e');
+    }
+    return {'success': false, 'error': 'Failed to update emergency rule'};
   }
 }

@@ -47,7 +47,8 @@ class _ElectionsScreenState extends State<ElectionsScreen> {
                     Switch(
                       value: _achaarSanhita,
                       activeColor: Colors.orange,
-                      onChanged: (val) {
+                      onChanged: (val) async {
+                        await ApiService.declareElection('CITY', achaarSanhita: val);
                         setState(() {
                           _achaarSanhita = val;
                         });

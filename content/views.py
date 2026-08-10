@@ -80,9 +80,26 @@ class CreatePostView(generics.CreateAPIView):
     serializer_class = PostCreateSerializer
 
     def create(self, request, *args, **kwargs):
+        # Fetch the user's city (assuming user belongs to a mohalla which belongs to a city)
+        city = request.user.city
+        if not city and request.user.mohalla:
+            city = request.user.mohalla.city
+            
+        if city:
+            if city.is_emergency_rule_active:
+                return Response(
+                    {'success': False, 'error': 'City is under EMERGENCY RULE. All posting is locked.'},
+                    status=status.HTTP_403_FORBIDDEN
+                )
+            if city.is_code_of_conduct_active:
+                return Response(
+                    {'success': False, 'error': 'Achaar Sanhita is active. Posting is currently disabled.'},
+                    status=status.HTTP_403_FORBIDDEN
+                )
+
         serializer = self.get_serializer(data=request.data)
         serializer.is_valid(raise_exception=True)
-        post = serializer.save()
+        post = serializer.save(user=request.user)
 
         logger.info(
             f"New post created: {post.id} by {request.user.name} "
