@@ -8,6 +8,7 @@ from django.urls import path
 from rest_framework_simplejwt.views import TokenRefreshView
 from accounts.views import (
     GoogleAuthView,
+    AppleAuthView,
     UserProfileView,
     UserProfileSetupView,
     OtherUserProfileView,
@@ -18,6 +19,8 @@ app_name = 'accounts'
 urlpatterns = [
     # POST /api/auth/google/ -> Google token verify, Device ID check, JWT return
     path('google/', GoogleAuthView.as_view(), name='google-login'),
+    # POST /api/auth/apple/ -> Apple token verify, Device ID check, JWT return
+    path('apple/', AppleAuthView.as_view(), name='apple-login'),
 
     # POST /api/auth/token/refresh/ -> JWT refresh
     path('token/refresh/', TokenRefreshView.as_view(), name='token-refresh'),

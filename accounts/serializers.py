@@ -25,6 +25,27 @@ class GoogleAuthSerializer(serializers.Serializer):
     )
 
 
+class AppleAuthSerializer(serializers.Serializer):
+    """
+    Apple Sign-In Serializer.
+    SCHEMA.md: POST /api/auth/apple/
+    """
+    apple_token = serializers.CharField(
+        required=True,
+        help_text='Apple Identity Token (JWT)',
+    )
+    device_id = serializers.CharField(
+        required=True,
+        max_length=255,
+        help_text='Physical device identifier for anti-fraud binding',
+    )
+    name = serializers.CharField(
+        required=False,
+        allow_blank=True,
+        help_text='Full name provided by Apple (only on first login)',
+    )
+
+
 class UserProfileSerializer(serializers.ModelSerializer):
     """
     User Profile Serializer — public profile data.

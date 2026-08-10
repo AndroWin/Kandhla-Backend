@@ -17,7 +17,7 @@ class UserManager(BaseUserManager):
     Email + Google ID se user create hota hai.
     """
 
-    def create_user(self, email, name, google_id=None, **extra_fields):
+    def create_user(self, email, name, google_id=None, apple_id=None, **extra_fields):
         """Normal citizen user create karo."""
         if not email:
             raise ValueError('Email address zaroori hai.')
@@ -26,6 +26,7 @@ class UserManager(BaseUserManager):
             email=email,
             name=name,
             google_id=google_id,
+            apple_id=apple_id,
             **extra_fields,
         )
         # Google login based hai, password set nahi hota normally
@@ -87,6 +88,16 @@ class User(AbstractBaseUser, PermissionsMixin):
         blank=True,
         verbose_name='Google ID',
         help_text='Google OAuth unique identifier',
+    )
+    
+    # Apple Authentication Fields
+    apple_id = models.CharField(
+        max_length=255,
+        unique=True,
+        null=True,
+        blank=True,
+        verbose_name='Apple ID',
+        help_text='Apple Sign-In unique identifier',
     )
 
     # Device ID Binding - Anti-fraud voting ke liye

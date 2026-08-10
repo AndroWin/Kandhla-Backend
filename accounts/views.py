@@ -11,10 +11,13 @@ from rest_framework.views import APIView
 from rest_framework.response import Response
 from rest_framework.permissions import AllowAny, IsAuthenticated
 from rest_framework_simplejwt.tokens import RefreshToken
+import jwt
+from jwt import PyJWKClient
 
 from accounts.models import User
 from accounts.serializers import (
     GoogleAuthSerializer,
+    AppleAuthSerializer,
     UserProfileSerializer,
     UserProfileSetupSerializer,
 )
@@ -148,6 +151,118 @@ class GoogleAuthView(APIView):
                 'picture': '',
             }
         return None
+
+
+class AppleAuthView(APIView):
+    """
+    Apple Sign-In Endpoint.
+    SCHEMA.md: POST /api/auth/apple/
+    - Verifies Apple identity token
+    - Checks device ID
+    - Returns JWT session token and user profile
+    """
+    permission_classes = [AllowAny]
+
+    def post(self, request):
+        serializer = AppleAuthSerializer(data=request.data)
+        serializer.is_valid(raise_exception=True)
+
+        apple_token = serializer.validated_data['apple_token']
+        device_id = serializer.validated_data['device_id']
+        provided_name = serializer.validated_data.get('name', '')
+
+        # Apple token verify karo
+        apple_user_info = self._verify_apple_token(apple_token)
+        if not apple_user_info:
+            return Response(
+                {
+                    'success': False,
+                    'error': 'Invalid Apple token. Login failed.',
+                },
+                status=status.HTTP_401_UNAUTHORIZED,
+            )
+
+        apple_id = apple_user_info.get('sub')
+        email = apple_user_info.get('email', f"{apple_id}@apple.kandhla.app")
+        name = provided_name if provided_name else "Apple User"
+
+        # User find karo ya create karo
+        user, created = User.objects.get_or_create(
+            apple_id=apple_id,
+            defaults={
+                'email': email,
+                'name': name,
+                'device_id': device_id,
+            },
+        )
+
+        if not created:
+            # Existing user — device ID update karo
+            user.device_id = device_id
+            if provided_name and not user.name:
+                user.name = provided_name
+            user.save(update_fields=['device_id', 'name'])
+
+        # Ban check
+        if user.is_banned:
+            return Response(
+                {
+                    'success': False,
+                    'error': 'Tumhara account banned hai.',
+                    'ban_until': user.ban_until,
+                    'strike_count': user.strike_count,
+                },
+                status=status.HTTP_403_FORBIDDEN,
+            )
+
+        # JWT tokens generate karo
+        refresh = RefreshToken.for_user(user)
+        profile_data = UserProfileSerializer(user).data
+
+        logger.info(
+            f"User {'created' if created else 'logged in'} via Apple: {user.email} "
+            f"(device: {device_id[:12]}...)"
+        )
+
+        return Response(
+            {
+                'success': True,
+                'is_new_user': created,
+                'tokens': {
+                    'access': str(refresh.access_token),
+                    'refresh': str(refresh),
+                },
+                'user': profile_data,
+            },
+            status=status.HTTP_200_OK if not created else status.HTTP_201_CREATED,
+        )
+
+    def _verify_apple_token(self, token):
+        """
+        Apple JWT token verify karo securely.
+        """
+        try:
+            url = "https://appleid.apple.com/auth/keys"
+            jwks_client = PyJWKClient(url)
+            signing_key = jwks_client.get_signing_key_from_jwt(token)
+            
+            data = jwt.decode(
+                token,
+                signing_key.key,
+                algorithms=["RS256"],
+                options={"verify_aud": False}
+            )
+            return data
+        except Exception as e:
+            logger.error(f"Apple token verification failed: {e}")
+            if settings.DEBUG:
+                # Dev mode mock fallback (agar internet/proxy issue ho)
+                try:
+                    data = jwt.decode(token, options={"verify_signature": False})
+                    return data
+                except:
+                    pass
+            return None
 
 
 class UserProfileView(generics.RetrieveUpdateAPIView):

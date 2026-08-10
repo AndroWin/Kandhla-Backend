@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/foundation.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:google_sign_in/google_sign_in.dart';
+import 'package:sign_in_with_apple/sign_in_with_apple.dart';
 import 'package:firebase_messaging/firebase_messaging.dart';
 import '../../theme/app_theme.dart';
 import '../../theme/glass_widgets.dart';
@@ -82,6 +84,73 @@ class _LoginScreenState extends State<LoginScreen> {
       if (!mounted) return;
       ScaffoldMessenger.of(context).showSnackBar(
         SnackBar(content: Text('Login Failed: $e'), backgroundColor: AppTheme.primaryRed),
+      );
+    } finally {
+      if (mounted) setState(() => isLoading = false);
+    }
+  }
+
+  void _handleAppleLogin() async {
+    setState(() => isLoading = true);
+
+    try {
+      final credential = await SignInWithApple.getAppleIDCredential(
+        scopes: [
+          AppleIDAuthorizationScopes.email,
+          AppleIDAuthorizationScopes.fullName,
+        ],
+      );
+
+      final String? identityToken = credential.identityToken;
+      if (identityToken == null) {
+        throw Exception('Failed to get Apple identity token');
+      }
+
+      String? fcmToken = await FirebaseMessaging.instance.getToken();
+      final String deviceId = fcmToken ?? 'device_${DateTime.now().millisecondsSinceEpoch}';
+      
+      // Extract name if provided (only available on first sign-in)
+      String providedName = '';
+      if (credential.givenName != null || credential.familyName != null) {
+        providedName = '${credential.givenName ?? ''} ${credential.familyName ?? ''}'.trim();
+      }
+
+      final response = await _apiService.client.post(
+        'auth/apple/',
+        data: {
+          'apple_token': identityToken,
+          'device_id': deviceId,
+          'name': providedName,
+        },
+      );
+
+      if (response.statusCode == 200 || response.statusCode == 201) {
+        final data = response.data;
+        final prefs = await SharedPreferences.getInstance();
+        await prefs.setString('access_token', data['tokens']['access']);
+        
+        if (!mounted) return;
+        
+        bool isNewUser = data['is_new_user'] ?? false;
+        
+        if (isNewUser) {
+           Navigator.pushReplacement(
+             context,
+             MaterialPageRoute(
+               builder: (_) => ProfileSetupScreen(mohalla: 'New Mohalla'),
+             ),
+           );
+        } else {
+           Navigator.pushReplacement(
+             context,
+             MaterialPageRoute(builder: (_) => const MainLayout()),
+           );
+        }
+      }
+    } catch (e) {
+      if (!mounted) return;
+      ScaffoldMessenger.of(context).showSnackBar(
+        SnackBar(content: Text('Apple Login Failed: $e'), backgroundColor: AppTheme.primaryRed),
       );
     } finally {
       if (mounted) setState(() => isLoading = false);
@@ -198,6 +267,18 @@ class _LoginScreenState extends State<LoginScreen> {
                               ),
                       ),
                     ),
+                    if (defaultTargetPlatform == TargetPlatform.iOS) ...[
+                      const SizedBox(height: 16),
+                      SizedBox(
+                        width: double.infinity,
+                        height: 50,
+                        child: SignInWithAppleButton(
+                          onPressed: isLoading ? () {} : _handleAppleLogin,
+                          borderRadius: const BorderRadius.all(Radius.circular(25)),
+                          style: SignInWithAppleButtonStyle.black,
+                        ),
+                      ),
+                    ],
                     const SizedBox(height: 32),
                   ],
                 ),

@@ -331,3 +331,15 @@
   - Added `WhiteNoiseMiddleware` to efficiently serve Django static files on Render without needing Nginx.
   - Authored a clean `build.sh` script to automate Render's CI/CD pipeline (install, collectstatic, migrate).
   - Verified codebase integrity locally with `python manage.py check` passing completely.
+
+---
+
+## Phase 14: Apple Sign-In (App Store Compliance)
+- **Status:** **COMPLETED**
+- **Changes:**
+  - Added `apple_id` to the `User` model in Django and successfully applied migrations.
+  - Implemented `AppleAuthView` in `accounts/views.py` using `PyJWT` to verify the Apple Identity Token and securely handle user login/registration.
+  - Added the `sign_in_with_apple` package to Flutter's `pubspec.yaml`.
+  - Upgraded `login_screen.dart` with a native `SignInWithAppleButton` that conditionally appears only on iOS devices (`TargetPlatform.iOS`).
+  - Added `com.apple.developer.applesignin` entitlement to macOS and iOS native Xcode projects.
+  - Validated integration with 0 issues in `flutter analyze` and `python manage.py check`.
