@@ -1,0 +1,57 @@
+{% extends "admin/base.html" %}
+
+{% block extrastyle %}
+{{ block.super }}
+<style>
+    /* Force Dark Theme to match adminui.html */
+    :root {
+        color-scheme: dark;
+        --primary: #0ea5e9;
+        --secondary: #fbbf24;
+        --accent: #22c55e;
+        
+        --body-bg: #050505;
+        --body-fg: #cbd5e1;
+        --body-quiet-color: #94a3b8;
+        --body-loud-color: #ffffff;
+        
+        --header-bg: #0a0f1c;
+        --header-color: var(--secondary);
+        --header-branding-color: var(--secondary);
+        --header-link-color: var(--primary);
+        
+        --breadcrumbs-bg: #111827;
+        --breadcrumbs-fg: var(--primary);
+        --breadcrumbs-link-fg: var(--primary);
+        
+        --link-fg: var(--primary);
+        --link-hover-color: #38bdf8;
+        --link-selected-fg: #ffffff;
+        
+        --button-bg: var(--primary);
+        --button-hover-bg: #0284c7;
+        
+        --border-color: rgba(255, 255, 255, 0.1);
+        --darkened-bg: #111827;
+        --selected-bg: #1e293b;
+        --selected-row: #1e293b;
+        
+        --object-tools-bg: var(--primary);
+        --object-tools-hover-bg: #0284c7;
+        --object-tools-fg: #ffffff;
+    }
+    
+    body {
+        font-family: 'Segoe UI', system-ui, sans-serif;
+    }
+
+    #branding h1 {
+        font-weight: bold;
+    }
+
+    #header {
+        border-bottom: 1px solid var(--border-color);
+        box-shadow: 0 4px 15px rgba(0,0,0,0.5);
+    }
+</style>
+{% endblock %}
