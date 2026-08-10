@@ -1,0 +1,84 @@
+Dekho bhai gemini ab meri bat ko dhyan se or bht dhyan se sunna 
+me ek naye project par kaam karna chahta hun jo ki ek app he 
+app ko me is trah se banana chahta hun jaise hamara Kandhla he usme alag alag mohallas hen ab me use aise banana chahta hun jaise Kandhla ki app ban gayi 
+log usme signup karenge 
+to unse profile details puchi jayengi Pehle hi wo apna mohalla select karenge dropdown se or unhe usi mohalle me add kar diya jayega wo phr apne mohalle me interact klr sakenge wahan post kar sakenge comment kar sakenge like kar sakenge 
+dusre mohallas ko bhi dekh sakenge lekin wahan like disklike to kar payenge lekin comment nahi kar sakenge isse ham takrav rok payenge apas me ab me tumhe features batata hun
+
+
+Features User App
+
+User Login/Signup Via Google
+Profile Completion Mohalla Selection
+user jis mohalle me signup karega usi mohalle me add ho jayega
+Mohalla Change nahi kr payega user change karne ke liye use sirf request dalni hogi wo admin approve karega
+User apne mohalle me Post kr payega Photo post, text Post and polls wagerah
+video ka option abhi nahi hoga
+user apne mohalle me Interact kar payega posts ke sath me like Dislike ka bhi option hoga
+User apne mohalle me Concerns Raise kar payega Concern raise karne ke liye use concern ki image, or us concern ki details deni hongi us concern par log interact kr sakenge Support or Do Not Support is trah se
+user dusre mohallas ko dropdown se select karke dekh payega wahan kiya chal raha he lekin wahan comment nahi kar sakega sirf like dislike or han dusre mohalle se aane wali likes dislikes show hongi konse mohalle se aayi hen lekin kisne ki wo nahi show hoga isi trah dusre mohallas ke concern ko bhi support ya do not support kar sakenge
+
+ab aate hen sabse main feature ki traf app ka apna hi ek election System hoga ye pura Political Simulation hoga as like real Politics
+App ka apna ek Election Commision Hoga
+work Kese karega..?
+
+Har teen maheene me pure City ka Chunav hoga uski date App ke Election Commission ki traf se jaari ki jayegi 
+jaise hi date ayegi har mohalle se log parcha bhar sakenge lekin seat allocate app ka chunav ayog karega parcha bharne ki samay seema date aane ke bad 5 din tak hogi uske bad koi parcha nahi bhar sakega 
+uske baad admin panel se 30 logo ko seats and symbols allocate kiye jayenge parche bhare jane ke 5 din ke baad
+uske baad 10 din tak khoob apna prachar prasar kar sakenge candidates 
+11ve din achaar Sanhita lag jayegi pure app par or koi bhi post nahi kr payega 
+12ve din Voting Hogi har mohalle se log votes karenge app me hi candidates ko voting do din chalegi ek admi ek hi vote kar payega
+14ve din achaar Sanhita hat jayegi or log post wagerah kar payenge and counting hogi votes ki and result jari kiya jayega or Kandhla ka naya Supereme Minister sabke samne aa jayega app me dikh jayega
+15ve din wo Oath lega and apni cabinet banayega ab uski cabinet me adhiktam 11 log hi ho sakenge 
+Supereme Minister ke adhikaar and uske special previledges honge
+
+jaise sabse Pehle to usko ek premium Supereme Minister Frame Allocate kiya jayega uski profile par jisme ek chamakta hua red ruby hoga
+uski profile par Chamkta hua verified badge hoga wo bhi maroon and white color me 
+and uski profile par open karte hi sabko dikhega Supereme Minister of Kandhala 
+uske pas special previledges honge
+wo har mohalle me interact kr sakega like Comment sab kuch kisi bhi mohalle me post kar payega kisi bhi mohalle ko orders de payega etc
+kisi bhi user ko shadow ban kar sakega kisi bhi user ko flag kr sakega or uske flag kiye huye user ki details admin panel ke pass aa jayengi admin panel supereme leader se bhi upper hoga uska faisla antim hoga admin panel leader ki report par accept karte huye user ko restricate bhi kar sakta he or decline bhi kr sakta he
+supereme leader or jitney bhi chune huye leaders app me honge un sabke interactions or unki posts par unko mile likes support and unke dwara kiye gaye karyon se unke credibility badhegi ya kam hogi unki credibility unke election ke liye important mani jayegi
+Supereme Minister ki cabinet me jo Adhikari honge unhe alag alag departments assign kiye jayenge or unhe unke department ke according hi priviledges diye jayenge wo tum batana kis ko kiya priv. diye jayenge
+cabinet ministers ko bhi frames and verified badges diye jayenge unke ruby ka color chamkeela violet hoga app me jitney bhi badges honge un sab ke colors 3d me honge
+
+ab isi trah se har maheene mohalla ka bhi chunav hoga pattern wahi same hoga chunav ka bas parcha usi mohalle ke log bhar sakenge 2 din parcha bharne ki deadline hogi teesre din symbols and seats allocate ki jayengi 5 din prachar ke liye milenge 9ve din achar Sanhita lagegi usi mohalle me sirf and votes dalengi 10 ve din counting and results and mohalla minister ki oath 11ve din hogi 
+Mohalla minister ki cabinet me 5 log honge
+mohalla ministers ko 3d green ruby badges diye jayenge or uske cabinet ministers ko 3d grey ruby
+
+mohalla minister ka adhikar kshetra kewal uska mohalla hoga or wo direct SM ki cabinet ko report karega 
+
+iske priviledges tum decide karke bata dena
+
+iske ilawa app me or konse features ho jo app ko blockbuster banayen wo tum mujhe batana 
+chunav prakriya ko bhi explain karna kese honi chahiye jo bilkul real feeling aaye users ko
+
+Admin Panel Features
+
+Admin panel ko ham is trah se design karenge ki ham usme alag Alag cities unke andar mohallas/colonies add kar saken or sabka apna independent ecosystem kaam kare 
+har city ka apna pura ecosystem hoga use dekhne ke liye Pehle admin ko city login karni padegi har city ko ek unique ID allocate hogi
+
+har city ka apna dedicated admin panel ho
+admin se kisi bhi mohalle ko add update delete kiya ja sake
+kisi bhi mohalle ke kisi bhi user ko ban, unban, shadow ban ya restricate kiya ja sake
+admin panel me blocked words karne ka option ho jo words us list me hon wo user use na kar sake post ya comments me
+kisi bhi user ko 3 chances diye jayenge teen warning agar wo abusive ya ganda behavior rakhta he to certain action perform kiye ja sake 
+jaise pehli bar use 6 ghanta ke liye shadow ban kar diya jaye reason dekar
+dusri bar 24 ghanta ke liye 
+teesri bar 3 din ke liye or agar phr bhi na mane to permanent ban and use mohalle me feature kar diay jaye ki ise ban kar diya gaya he 
+
+isi trah se har mohalle ka bhi CRUD hoga
+
+har city ke admin panel me ek or admin panel ho Jahan se wo city apni city and mohalle ke chunav handle kare wo ek trah se election commission hoga us city ka 
+wahan se wo applications approve disapprove, symbol and seats allocation, dates management, ministers ke priviledges and unke adhikar control kar saken matlab har trah se chunavi parkriya usme added ho
+counting, voting management, results wagerah sab kuch
+
+
+
+
+
+
+ab dhyan se ek or baat suno abhi code nahi likhna he abhi ham discussion me hen ab tum mujhe bataoge isme kiya or hona chahiye kiya nahi kese sari chizen smoothly kaam karengi kis trah se sab manage ho payega
+or haan mene jo names bataye hen Supereme Minister and Mohalla minister wagerah wo sab aise hi bataye hen tum mujhe suggest karna kiya name diye jaye jo bilkul real feel den
+or haan hame har feature or app is trah banani he ki play store, google ya kisi bhi trah ke kanoon ka violation na ho sake 
+ab tum ye sab padh kar bht dhyan se smjh lo me akhir chahta kiya hun or mujhe suggestions do 

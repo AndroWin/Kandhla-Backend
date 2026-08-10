@@ -1,0 +1,800 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Republic of Kandhla - All 35 Screens Masterplan</title>
+    <style>
+        :root {
+            --bg-dark: #0a0f1c; --bg-panel: #111827; --glass-bg: rgba(255, 255, 255, 0.05);
+            --glass-br: rgba(255, 255, 255, 0.1); --blue: #0ea5e9; --gold: #fbbf24;
+            --green: #22c55e; --red: #ef4444; --purple: #c084fc; --text-m: #cbd5e1;
+            --ruby-red: linear-gradient(135deg, #991b1b, #dc2626);
+            --ruby-violet: linear-gradient(135deg, #7e22ce, #c026d3);
+        }
+        * { box-sizing: border-box; }
+        body { margin: 0; padding: 0; font-family: 'Segoe UI', system-ui, sans-serif; background: #050505; color: #fff; line-height: 1.5; }
+        header { text-align: center; padding: 3rem 1rem; background: rgba(10,15,28,0.9); border-bottom: 1px solid var(--glass-br); position: sticky; top: 0; z-index: 100; backdrop-filter: blur(10px); }
+        h1 { margin: 0 0 10px 0; font-size: 2.2rem; color: var(--gold); }
+        .container { max-width: 1600px; margin: 0 auto; padding: 2rem; }
+        .cat-title { font-size: 1.8rem; border-bottom: 2px solid var(--glass-br); padding-bottom: 10px; margin: 3rem 0 2rem; color: var(--blue); }
+        .grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(320px, 1fr)); gap: 2.5rem; justify-items: center; }
+        
+        /* Phone Mockup CSS */
+        .ph { width: 300px; height: 600px; background: var(--bg-dark); border-radius: 35px; border: 8px solid #222; position: relative; overflow: hidden; display: flex; flex-direction: column; box-shadow: 0 15px 35px rgba(0,0,0,0.8); }
+        .nt { position: absolute; top: 0; left: 50%; transform: translateX(-50%); width: 120px; height: 25px; background: #222; border-radius: 0 0 12px 12px; z-index: 10; }
+        .sc { flex: 1; overflow-y: auto; overflow-x: hidden; position: relative; display: flex; flex-direction: column; }
+        .sc::-webkit-scrollbar { display: none; }
+        
+        /* Common UI Classes */
+        .ab { background: rgba(10,15,28,0.9); padding: 35px 15px 15px; border-bottom: 1px solid var(--glass-br); display: flex; justify-content: space-between; align-items: center; font-weight: bold; position: sticky; top:0; z-index: 5;}
+        .bn { background: var(--bg-panel); padding: 12px; display: flex; justify-content: space-around; border-top: 1px solid var(--glass-br); font-size: 0.75rem; color: var(--text-m); }
+        .cd { background: var(--glass-bg); margin: 10px; border-radius: 12px; padding: 12px; border: 1px solid var(--glass-br); }
+        .fx { display: flex; align-items: center; }
+        .fx-b { display: flex; justify-content: space-between; align-items: center; }
+        .av { width: 35px; height: 35px; border-radius: 50%; background: #334155; }
+        .btn { background: var(--blue); color: #fff; padding: 8px 15px; border-radius: 20px; text-align: center; font-weight: bold; font-size: 0.85rem; }
+        .btn-g { background: #fff; color: #000; padding: 12px; border-radius: 25px; text-align: center; font-weight: bold; }
+        .inp { background: rgba(0,0,0,0.3); border: 1px solid var(--glass-br); padding: 10px; border-radius: 8px; color: #fff; width: 100%; font-size: 0.8rem; margin-top: 5px; }
+        .txt-s { font-size: 0.75rem; color: var(--text-m); }
+        
+        /* Details Box */
+        .dtl { margin-top: 15px; background: rgba(255,255,255,0.02); padding: 15px; border-radius: 12px; border: 1px solid var(--glass-br); font-size: 0.85rem; width: 300px; color: var(--text-m); }
+        .dtl h4 { margin: 0 0 5px 0; color: #fff; font-size: 0.95rem; }
+        .dtl ul { padding-left: 15px; margin: 0 0 10px 0; }
+        
+        /* Specific Styles */
+        .gold-br { border-color: var(--gold); } .red-br { border-left: 3px solid var(--red); }
+        .ruby { position: absolute; bottom: -2px; right: -2px; width: 12px; height: 12px; background: var(--ruby-red); border-radius: 50%; border: 1px solid #fff; }
+        .bg-grad { background: radial-gradient(circle, #1e293b, #000); }
+    </style>
+</head>
+<body>
+
+<header>
+    <h1>Republic of Kandhla - UI Blueprint</h1>
+    <p>All 35 Screens (Core, VIP, Elections, Utils) Designed & Documented</p>
+</header>
+
+<div class="container">
+
+    <!-- 1. AUTH & ONBOARDING -->
+    <div class="cat-title">🚀 1. Onboarding & Auth (3 Screens)</div>
+    <div class="grid">
+        
+        <!-- 1.1 Splash -->
+        <div>
+            <div class="ph"><div class="nt"></div>
+                <div class="sc bg-grad" style="justify-content:center; align-items:center; text-align:center; padding:20px;">
+                    <div style="width:80px; height:80px; background:linear-gradient(135deg, var(--gold), #d97706); border-radius:20px; display:flex; align-items:center; justify-content:center; font-size:2.5rem; margin-bottom:15px; box-shadow:0 0 20px rgba(251,191,36,0.3);">🏛️</div>
+                    <div style="font-family:Georgia; font-size:1.5rem; margin-bottom:40px;">Republic Of<br>Kandhla</div>
+                    <div class="txt-s" style="margin-bottom:20px;">Developed By<br><strong style="color:#fff;">Diamondz Technologiez</strong><br>in Association with<br><strong style="color:#fff;">Hina Digital Solutions</strong></div>
+                    <div class="txt-s" style="color:#fff;">Proudly Made in 🇮🇳 with ❤️</div>
+                </div>
+            </div>
+            <div class="dtl">
+                <h4>1.1 Splash Screen</h4>
+                <ul><li>UI: Pulse anim on logo, fade-in text.</li><li>Logic: Checks Auth Token via Django API in bg (2s).</li></ul>
+            </div>
+        </div>
+
+        <!-- 1.2 Login -->
+        <div>
+            <div class="ph"><div class="nt"></div>
+                <div class="sc" style="background:linear-gradient(180deg,#0a0f1c,#1e1b4b); justify-content:flex-end; padding:20px;">
+                    <h2 style="margin:0 0 5px;">Welcome Citizen</h2>
+                    <p class="txt-s" style="margin-bottom:20px;">Join the digital ecosystem.</p>
+                    <div class="cd" style="margin:0 0 20px 0;">
+                        <label class="txt-s" style="color:var(--blue);">Select Mohalla</label>
+                        <div class="inp">Mohalla X ▼</div>
+                        <div style="font-size:0.6rem; color:var(--red); margin-top:5px;">*Cannot be changed later.</div>
+                    </div>
+                    <div class="txt-s" style="text-align:center; margin-bottom:15px;">By continuing, I pledge to the Samvidhan.</div>
+                    <div class="btn-g">G Continue with Google</div>
+                </div>
+            </div>
+            <div class="dtl">
+                <h4>1.2 Login & Setup</h4>
+                <ul><li>UI: Bottom sheet glassmorphism.</li><li>Logic: Firebase Auth. Captures Device ID & selected Mohalla.</li></ul>
+            </div>
+        </div>
+
+        <!-- 1.3 Profile Setup -->
+        <div>
+            <div class="ph"><div class="nt"></div>
+                <div class="sc" style="padding:40px 20px 20px; align-items:center;">
+                    <div class="av" style="width:80px; height:80px; margin-bottom:20px; display:flex; align-items:center; justify-content:center; font-size:2rem;">📷</div>
+                    <div style="width:100%; margin-bottom:15px;">
+                        <label class="txt-s">Full Name</label><div class="inp">Arqum Siddiqui</div>
+                    </div>
+                    <div style="width:100%; margin-bottom:30px;">
+                        <label class="txt-s">Bio</label><div class="inp">Software Dev</div>
+                    </div>
+                    <div class="btn" style="width:100%;">Complete Profile</div>
+                </div>
+            </div>
+            <div class="dtl">
+                <h4>1.3 Complete Profile</h4>
+                <ul><li>UI: Image picker, input fields.</li><li>Logic: POST to Django API to create user record.</li></ul>
+            </div>
+        </div>
+    </div>
+
+    <!-- 2. CORE FEED -->
+    <div class="cat-title">📱 2. Core Navigation & Feed (6 Screens)</div>
+    <div class="grid">
+        
+        <!-- 2.1 Home -->
+        <div>
+            <div class="ph"><div class="nt"></div>
+                <div class="sc">
+                    <div class="ab"><div>Mohalla X</div><div>🔔</div></div>
+                    <div class="cd gold-br" style="background:rgba(251,191,36,0.05);">
+                        <div class="fx" style="gap:10px; margin-bottom:5px;">
+                            <div class="av" style="background:var(--gold);"></div>
+                            <div><div style="font-size:0.8rem; color:var(--gold); font-weight:bold;">City Admin</div><div class="txt-s">Pinned Announcement</div></div>
+                        </div>
+                        <div class="txt-s" style="color:#fff;">Kal se parche bhare jayenge!</div>
+                    </div>
+                    <div class="cd">
+                        <div class="fx" style="gap:10px; margin-bottom:5px;">
+                            <div class="av"></div>
+                            <div><div style="font-size:0.8rem; font-weight:bold;">Citizen A</div><div class="txt-s">2 hrs ago</div></div>
+                        </div>
+                        <div class="txt-s" style="color:#fff;">Mausam acha he.</div>
+                        <div class="fx" style="gap:15px; margin-top:10px; font-size:0.7rem; color:var(--text-m);"><span>👍 12</span><span>👎 2</span><span>💬 5</span></div>
+                    </div>
+                </div>
+                <div class="bn"><span style="color:var(--blue);">🏠 Feed</span><span>🌍 Explore</span><span>➕ Post</span><span>👤 Profile</span></div>
+            </div>
+            <div class="dtl">
+                <h4>2.1 Home Feed</h4>
+                <ul><li>UI: Pinned post styling.</li><li>Logic: Pagination from Django. Real-time likes from Firebase.</li></ul>
+            </div>
+        </div>
+
+        <!-- 2.2 Explore -->
+        <div>
+            <div class="ph"><div class="nt"></div>
+                <div class="sc">
+                    <div class="ab" style="background:var(--blue); color:#000;"><div style="font-size:0.9rem;">Explore: Mohalla Y ▼</div></div>
+                    <div class="cd">
+                        <div class="fx" style="gap:10px; margin-bottom:5px;">
+                            <div class="av"></div>
+                            <div><div style="font-size:0.8rem; font-weight:bold;">Citizen B</div><div class="txt-s">Mohalla Y</div></div>
+                        </div>
+                        <div class="txt-s" style="color:#fff;">Just visiting here.</div>
+                        <div class="fx" style="gap:15px; margin-top:10px; font-size:0.7rem; color:var(--text-m);"><span>👍 4</span><span>👎 0</span><span style="opacity:0.3;">💬 Disabled</span></div>
+                    </div>
+                </div>
+                <div class="bn"><span>🏠 Feed</span><span style="color:var(--blue);">🌍 Explore</span><span>➕ Post</span><span>👤 Profile</span></div>
+            </div>
+            <div class="dtl">
+                <h4>2.2 Cross-Mohalla (Explore)</h4>
+                <ul><li>UI: Blue Appbar. Comment icon disabled.</li><li>Logic: Backend blocks POST comment if Mohalla IDs differ.</li></ul>
+            </div>
+        </div>
+
+        <!-- 2.3 Concerns -->
+        <div>
+            <div class="ph"><div class="nt"></div>
+                <div class="sc">
+                    <div class="ab"><div>Samasya Hub</div><div class="btn" style="padding:4px 8px; font-size:0.7rem;">Raise</div></div>
+                    <div class="cd red-br">
+                        <div class="fx-b"><span class="txt-s">Issue #102</span><span class="txt-s" style="color:var(--red);">Pending</span></div>
+                        <div style="font-size:0.85rem; font-weight:bold; margin:5px 0;">Sadak kharab he</div>
+                        <div style="height:60px; background:#222; border-radius:5px; margin-bottom:10px;"></div>
+                        <div class="fx" style="gap:5px;">
+                            <div style="background:var(--green); color:#000; padding:4px; border-radius:4px; font-size:0.6rem; font-weight:bold;">↑ Sup (45)</div>
+                            <div style="background:var(--red); padding:4px; border-radius:4px; font-size:0.6rem; font-weight:bold;">↓ No (3)</div>
+                        </div>
+                    </div>
+                </div>
+                <div class="bn"><span>🏠 Feed</span><span style="color:var(--blue);">📢 Concerns</span><span>➕ Post</span><span>👤 Profile</span></div>
+            </div>
+            <div class="dtl">
+                <h4>2.3 Concerns Hub</h4>
+                <ul><li>UI: Red/Green buttons for support.</li><li>Logic: Support count adds to author's Credibility Score.</li></ul>
+            </div>
+        </div>
+
+        <!-- 2.4 Create -->
+        <div>
+            <div class="ph"><div class="nt"></div>
+                <div class="sc">
+                    <div class="ab"><div>Create</div><div style="font-size:0.8rem; color:var(--blue);">Post</div></div>
+                    <div class="fx" style="gap:10px; padding:10px 15px; border-bottom:1px solid var(--glass-br); font-size:0.8rem;">
+                        <span style="color:var(--blue); border-bottom:2px solid var(--blue);">Normal</span><span>Concern</span><span>Whistleblower</span>
+                    </div>
+                    <div style="padding:15px;">
+                        <textarea class="inp" rows="5" placeholder="What's happening?"></textarea>
+                        <div class="cd" style="margin:10px 0; text-align:center; padding:20px; border-style:dashed;">📷 Add Image</div>
+                        <label class="fx txt-s" style="gap:10px;"><input type="checkbox"> Mark as Official Order (Ministers Only)</label>
+                    </div>
+                </div>
+            </div>
+            <div class="dtl">
+                <h4>2.4 Create Screen</h4>
+                <ul><li>UI: Tabs for Post types. Upload box.</li><li>Logic: Image to AWS/Firebase. Checkbox API role check.</li></ul>
+            </div>
+        </div>
+
+        <!-- 2.5 Notifications -->
+        <div>
+            <div class="ph"><div class="nt"></div>
+                <div class="sc">
+                    <div class="ab">Notifications</div>
+                    <div style="padding:10px;">
+                        <div class="fx" style="gap:10px; margin-bottom:15px;">
+                            <div class="av" style="background:var(--blue);"></div>
+                            <div class="txt-s"><strong style="color:#fff;">Election Comm.</strong> announced dates! <br><span style="color:var(--blue);">2m ago</span></div>
+                        </div>
+                        <div class="fx" style="gap:10px; margin-bottom:15px;">
+                            <div class="av"></div>
+                            <div class="txt-s"><strong style="color:#fff;">Citizen B</strong> liked your post. <br><span>1 hr ago</span></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="dtl">
+                <h4>2.5 Notifications</h4>
+                <ul><li>UI: List view with unread highlights.</li><li>Logic: Firebase Cloud Messaging (FCM) integration.</li></ul>
+            </div>
+        </div>
+
+        <!-- 2.6 My Profile -->
+        <div>
+            <div class="ph"><div class="nt"></div>
+                <div class="sc">
+                    <div class="ab">Profile <span>⚙️</span></div>
+                    <div style="text-align:center; padding:20px 0;">
+                        <div style="width:70px; height:70px; border-radius:50%; border:2px solid var(--gold); margin:0 auto 10px; position:relative;">
+                            <div class="av" style="width:100%; height:100%;"></div><div class="ruby"></div>
+                        </div>
+                        <div style="font-weight:bold;">Arqum Siddiqui</div>
+                        <div class="txt-s" style="color:var(--gold);">👑 Supreme Minister</div>
+                        <div class="fx" style="justify-content:center; gap:20px; margin-top:15px;">
+                            <div><div style="font-weight:bold; color:var(--blue);">9850</div><div class="txt-s">Credibility</div></div>
+                            <div><div style="font-weight:bold;">142</div><div class="txt-s">Posts</div></div>
+                        </div>
+                    </div>
+                </div>
+                <div class="bn"><span>🏠 Feed</span><span>🌍 Explore</span><span>➕ Post</span><span style="color:var(--blue);">👤 Profile</span></div>
+            </div>
+            <div class="dtl">
+                <h4>2.6 My Profile</h4>
+                <ul><li>UI: 3D Ruby and VIP Gold Frame.</li><li>Logic: Fetches `Role` flag. If Minister, applies VIP UI.</li></ul>
+            </div>
+        </div>
+    </div>
+
+    <!-- 3. DETAILED VIEWS -->
+    <div class="cat-title">🔍 3. Detailed Views (3 Screens)</div>
+    <div class="grid">
+        
+        <!-- 3.1 Single Post -->
+        <div>
+            <div class="ph"><div class="nt"></div>
+                <div class="sc">
+                    <div class="ab"><div>← Post</div></div>
+                    <div class="cd" style="margin:0; border:none; border-radius:0; border-bottom:1px solid var(--glass-br);">
+                        <div class="fx" style="gap:10px; margin-bottom:10px;">
+                            <div class="av"></div><div><div style="font-size:0.8rem; font-weight:bold;">User A</div></div>
+                        </div>
+                        <div class="txt-s" style="color:#fff; font-size:0.85rem;">Full detail post here...</div>
+                    </div>
+                    <div style="padding:10px;">
+                        <div class="txt-s" style="margin-bottom:10px;">Comments (5)</div>
+                        <div class="fx" style="gap:10px; margin-bottom:10px;"><div class="av" style="width:25px;height:25px;"></div><div class="cd" style="margin:0; padding:8px;">Nice!</div></div>
+                    </div>
+                </div>
+                <div style="padding:10px; background:var(--bg-panel);"><div class="inp fx-b" style="margin:0; color:var(--text-m);">Write comment... <span style="color:var(--blue);">➤</span></div></div>
+            </div>
+            <div class="dtl">
+                <h4>3.1 Single Post Thread</h4>
+                <ul><li>UI: Sticky comment box.</li><li>Logic: Input checks local profanity list before API call.</li></ul>
+            </div>
+        </div>
+
+        <!-- 3.2 Single Concern -->
+        <div>
+            <div class="ph"><div class="nt"></div>
+                <div class="sc">
+                    <div class="ab"><div>← Issue #102</div></div>
+                    <div style="height:150px; background:#222; position:relative;">
+                        <div style="position:absolute; bottom:10px; right:10px; background:var(--red); padding:2px 8px; border-radius:5px; font-size:0.7rem;">Pending</div>
+                    </div>
+                    <div style="padding:15px;">
+                        <h3 style="margin:0 0 10px; font-size:1rem;">Sadak kharab he</h3>
+                        <div style="background:rgba(255,255,255,0.05); height:8px; border-radius:4px; display:flex; margin-bottom:15px;">
+                            <div style="width:80%; background:var(--green); border-radius:4px 0 0 4px;"></div>
+                            <div style="width:20%; background:var(--red); border-radius:0 4px 4px 0;"></div>
+                        </div>
+                        <div class="cd gold-br" style="margin:0; margin-top:15px;"><span class="txt-s" style="color:var(--gold);">Vikas Mantri Replied:</span><br><span style="font-size:0.8rem;">Priority set. Fix in 2 days.</span></div>
+                    </div>
+                </div>
+            </div>
+            <div class="dtl">
+                <h4>3.2 Single Concern</h4>
+                <ul><li>UI: Big image, support ratio bar.</li><li>Logic: Admin/Minister replies pinned for transparency.</li></ul>
+            </div>
+        </div>
+
+        <!-- 3.3 Other Profile -->
+        <div>
+            <div class="ph"><div class="nt"></div>
+                <div class="sc">
+                    <div class="ab"><div>← Profile</div><div style="color:var(--red);">⚠️ Flag</div></div>
+                    <div style="text-align:center; padding:20px 0;">
+                        <div class="av" style="width:70px; height:70px; margin:0 auto 10px;"></div>
+                        <div style="font-weight:bold;">Citizen XYZ</div>
+                        <div class="fx" style="justify-content:center; gap:20px; margin-top:15px;">
+                            <div><div style="font-weight:bold; color:var(--blue);">450</div><div class="txt-s">Credibility</div></div>
+                        </div>
+                        <div class="btn" style="width:120px; margin:15px auto 0;">View Posts</div>
+                    </div>
+                </div>
+            </div>
+            <div class="dtl">
+                <h4>3.3 Other Profile</h4>
+                <ul><li>UI: Flag button on top right.</li><li>Logic: API hides private info (strike count) from public.</li></ul>
+            </div>
+        </div>
+    </div>
+
+    <!-- 4. ELECTIONS -->
+    <div class="cat-title">🗳️ 4. Election Ecosystem (5 Screens)</div>
+    <div class="grid">
+        
+        <!-- 4.1 Hub -->
+        <div>
+            <div class="ph"><div class="nt"></div>
+                <div class="sc">
+                    <div class="ab">Elections Hub</div>
+                    <div style="padding:15px; text-align:center;">
+                        <div class="cd gold-br" style="padding:20px;">
+                            <div class="txt-s" style="color:var(--gold);">Next City Election In</div>
+                            <h2 style="margin:5px 0;">14d : 05h : 20m</h2>
+                        </div>
+                        <h4 style="margin:20px 0 10px; text-align:left;">Current Ministers</h4>
+                        <div class="fx" style="gap:10px; overflow-x:auto;">
+                            <div class="av" style="min-width:40px;height:40px;border:2px solid var(--gold);"></div>
+                            <div class="av" style="min-width:40px;height:40px;border:2px solid var(--purple);"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="dtl">
+                <h4>4.1 Election Hub</h4>
+                <ul><li>UI: Live countdown, Minister avatars.</li><li>Logic: Syncs with Django server time.</li></ul>
+            </div>
+        </div>
+
+        <!-- 4.2 Nominate -->
+        <div>
+            <div class="ph"><div class="nt"></div>
+                <div class="sc">
+                    <div class="ab"><div>← Parcha Bharo</div></div>
+                    <div style="padding:15px;">
+                        <div class="txt-s" style="color:var(--blue); margin-bottom:15px;">Eligible (Score > 500)</div>
+                        <label class="txt-s">Manifesto (Sankalp)</label>
+                        <textarea class="inp" rows="6" placeholder="Your promises..."></textarea>
+                        <div class="cd" style="margin:15px 0 0; text-align:center;">Choose Symbol 🚲</div>
+                        <div class="btn" style="margin-top:20px; text-align:center;">Submit Parcha</div>
+                    </div>
+                </div>
+            </div>
+            <div class="dtl">
+                <h4>4.2 Nomination Form</h4>
+                <ul><li>UI: Form with symbol picker.</li><li>Logic: Active ONLY Day 1-5. Blocks if Credibility < 500.</li></ul>
+            </div>
+        </div>
+        
+        <!-- 4.3 Manifesto -->
+        <div>
+            <div class="ph"><div class="nt"></div>
+                <div class="sc">
+                    <div class="ab"><div>← Candidate A</div></div>
+                    <div style="padding:15px;">
+                        <div class="fx" style="gap:10px; margin-bottom:20px;">
+                            <div class="av" style="width:50px;height:50px;"></div>
+                            <div>
+                                <div style="font-weight:bold; font-size:1.1rem;">Candidate A</div>
+                                <div class="txt-s" style="background:#fff; color:#000; padding:2px 8px; border-radius:10px; display:inline-block;">Symbol: 🚲</div>
+                            </div>
+                        </div>
+                        <div class="cd" style="margin:0;"><h4 style="margin:0 0 10px; color:var(--blue);">Manifesto</h4><p class="txt-s" style="color:#fff;">1. Clean Roads.<br>2. Better lights.</p></div>
+                    </div>
+                </div>
+            </div>
+            <div class="dtl">
+                <h4>4.3 Manifesto View</h4>
+                <ul><li>UI: Brochure layout with symbol.</li><li>Logic: Read-only fetch from Election DB.</li></ul>
+            </div>
+        </div>
+
+        <!-- 4.4 Voting -->
+        <div>
+            <div class="ph" style="border-color:#000;"><div class="nt"></div>
+                <div class="sc" style="background:#050505;">
+                    <div class="ab" style="justify-content:center; color:var(--blue);">SECURE BOOTH</div>
+                    <div style="padding:15px;">
+                        <div class="cd" style="margin:0 0 15px; border-color:var(--glass-br);">
+                            <div class="fx-b">
+                                <div class="fx" style="gap:10px;"><div style="font-size:1.5rem;">🚲</div><div>Cand. A</div></div>
+                                <div class="btn" style="background:var(--blue);">TAP TO VOTE</div>
+                            </div>
+                        </div>
+                        <div class="txt-s" style="text-align:center; color:var(--red); margin-top:20px;">*No Digital Slip Generated.</div>
+                    </div>
+                </div>
+            </div>
+            <div class="dtl">
+                <h4>4.4 Voting Booth</h4>
+                <ul><li>UI: Darker UI. Long-press vote button.</li><li>Logic: 1 Device = 1 Vote. Sent to Redis queue to prevent crash.</li></ul>
+            </div>
+        </div>
+
+        <!-- 4.5 Oath -->
+        <div>
+            <div class="ph"><div class="nt"></div>
+                <div class="sc" style="background:linear-gradient(180deg,#0a0f1c,var(--gold)); align-items:center; justify-content:center;">
+                    <div style="font-size:3rem; margin-bottom:20px;">🎊</div>
+                    <div style="width:100px; height:100px; border-radius:50%; border:3px solid #fff; margin-bottom:10px; position:relative;">
+                        <div class="av" style="width:100%; height:100%;"></div>
+                        <div class="ruby" style="width:25px; height:25px; bottom:-5px; right:-5px; border-width:2px;"></div>
+                    </div>
+                    <h2 style="margin:0; color:#000;">New Supreme Minister</h2>
+                    <h3 style="margin:0; color:#000;">Arqum Siddiqui</h3>
+                </div>
+            </div>
+            <div class="dtl">
+                <h4>4.5 Results & Oath</h4>
+                <ul><li>UI: Confetti anim, profile transitions to VIP frame.</li><li>Logic: Celery auto-triggers on Day 14. Assigns Role.</li></ul>
+            </div>
+        </div>
+    </div>
+
+    <!-- 5. VIP MANTRALAYA -->
+    <div class="cat-title">🛡️ 5. VIP / Mantralaya (5 Screens)</div>
+    <div class="grid">
+        
+        <!-- 5.1 Dashboard -->
+        <div>
+            <div class="ph"><div class="nt"></div>
+                <div class="sc" style="background:linear-gradient(180deg,#1e1b4b,#0a0f1c);">
+                    <div class="ab" style="background:transparent; justify-content:center; color:var(--purple); font-size:1.2rem;">🛡️ Mantralaya</div>
+                    <div style="padding:15px;">
+                        <div class="txt-s" style="text-align:center; margin-bottom:20px;">Home Minister Powers</div>
+                        <div class="cd" style="border-color:rgba(192,38,211,0.3);"><div class="fx" style="gap:10px;"><span style="font-size:1.5rem;">⚠️</span><div><div style="font-weight:bold;">Mod Queue</div><div class="txt-s">12 pending</div></div></div></div>
+                        <div class="cd" style="border-color:rgba(192,38,211,0.3);"><div class="fx" style="gap:10px;"><span style="font-size:1.5rem;">🔨</span><div><div style="font-weight:bold;">Issue Ban</div><div class="txt-s">Strike 1</div></div></div></div>
+                    </div>
+                </div>
+            </div>
+            <div class="dtl">
+                <h4>5.1 Mantralaya Hub</h4>
+                <ul><li>UI: Purple tint. Hidden from citizens.</li><li>Logic: Dynamic rendering based on `Department` field in DB.</li></ul>
+            </div>
+        </div>
+
+        <!-- 5.2 Mod Queue -->
+        <div>
+            <div class="ph"><div class="nt"></div>
+                <div class="sc">
+                    <div class="ab"><div>← Mod Queue</div></div>
+                    <div style="padding:15px;">
+                        <div class="cd red-br" style="margin:0 0 15px;">
+                            <div class="txt-s" style="margin-bottom:10px;">Report: Spam/Abuse</div>
+                            <div style="padding:10px; background:rgba(0,0,0,0.3); border-radius:8px; font-size:0.8rem; margin-bottom:10px;">Post text here...</div>
+                            <div class="fx-b"><span class="btn" style="background:#333;">Reject</span><span class="btn" style="background:var(--red);">6hr Ban</span></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="dtl">
+                <h4>5.2 Mod Queue (Home Min)</h4>
+                <ul><li>UI: Actionable cards for reported items.</li><li>Logic: Ban updates user's `Strike_Count` and timestamp.</li></ul>
+            </div>
+        </div>
+        
+        <!-- 5.3 Priority Room -->
+        <div>
+            <div class="ph"><div class="nt"></div>
+                <div class="sc">
+                    <div class="ab"><div>← Priority Room</div></div>
+                    <div style="padding:15px;">
+                        <div class="cd" style="margin:0; border-color:var(--green);">
+                            <div class="fx-b" style="margin-bottom:10px;"><strong>Issue #102</strong><span class="txt-s" style="color:var(--green);">45 Sup</span></div>
+                            <div class="btn" style="width:100%; background:var(--gold); color:#000;">⭐ Mark City Priority</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="dtl">
+                <h4>5.3 Priority (Vikas Min)</h4>
+                <ul><li>UI: Highlights top concerns.</li><li>Logic: Updates DB status flag to alert Master Admin.</li></ul>
+            </div>
+        </div>
+
+        <!-- 5.4 Broadcast -->
+        <div>
+            <div class="ph"><div class="nt"></div>
+                <div class="sc">
+                    <div class="ab"><div>← Broadcast</div></div>
+                    <div style="padding:15px;">
+                        <label class="txt-s">Target</label><div class="inp">All City ▼</div>
+                        <label class="txt-s" style="display:block; margin-top:15px;">Message</label>
+                        <textarea class="inp" rows="4"></textarea>
+                        <div class="btn" style="margin-top:20px; background:var(--purple);">Send Push Alert</div>
+                    </div>
+                </div>
+            </div>
+            <div class="dtl">
+                <h4>5.4 Broadcast (I&B Min)</h4>
+                <ul><li>UI: Target dropdown, text area.</li><li>Logic: Triggers Django to send targeted FCM notifications.</li></ul>
+            </div>
+        </div>
+
+        <!-- 5.5 Local Control -->
+        <div>
+            <div class="ph"><div class="nt"></div>
+                <div class="sc">
+                    <div class="ab"><div>← Local Control</div></div>
+                    <div style="padding:15px;">
+                        <div class="cd" style="margin:0 0 15px; border-color:var(--green);"><div style="font-weight:bold; color:var(--green);">Pin Poll to Top</div></div>
+                        <div class="txt-s">My Cabinet (5)</div>
+                        <div class="fx" style="gap:10px; margin-top:10px;">
+                            <div class="av" style="border:2px solid #999;"></div><div class="av" style="border:2px solid #999;"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="dtl">
+                <h4>5.5 Local (Mohalla Min)</h4>
+                <ul><li>UI: Dashboard for local polls/cabinet.</li><li>Logic: RBAC strictly scoped to their `Mohalla_ID`.</li></ul>
+            </div>
+        </div>
+    </div>
+
+    <!-- 6. DRAWER & LEGAL -->
+    <div class="cat-title">☰ 6. Drawer, Info & Legal (8 Screens)</div>
+    <div class="grid">
+        
+        <!-- 6.1 Samvidhan -->
+        <div>
+            <div class="ph"><div class="nt"></div>
+                <div class="sc" style="background:#050505;">
+                    <div class="ab"><div>← Samvidhan</div></div>
+                    <div style="padding:15px;">
+                        <div style="border:1px solid var(--gold); padding:15px; border-radius:8px; background:rgba(20,20,30,0.9);">
+                            <div style="text-align:center; color:var(--gold); font-family:Georgia; margin-bottom:15px; font-style:italic;" class="txt-s">"Hum, Nagrik..."</div>
+                            <div style="color:var(--blue); font-weight:bold;">Act 1: Mool Adhikar</div>
+                            <div style="border-left:2px solid rgba(251,191,36,0.3); padding-left:10px; margin-top:5px; font-size:0.8rem;">Clause 1.1: Post ki azadi.</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="dtl">
+                <h4>6.1 City Samvidhan</h4>
+                <ul><li>UI: Vintage dark paper with Gold border.</li><li>Logic: Rendered from Django Rich Text Editor.</li></ul>
+            </div>
+        </div>
+
+        <!-- 6.2 Leaderboard -->
+        <div>
+            <div class="ph"><div class="nt"></div>
+                <div class="sc">
+                    <div class="ab"><div>← Leaderboard</div></div>
+                    <div style="padding:15px;">
+                        <div class="cd gold-br" style="margin:0 0 10px; padding:10px;"><div class="fx-b"><div>#1 <strong>Citizen X</strong></div><div style="color:var(--gold);">9800 💎</div></div></div>
+                        <div class="cd" style="margin:0 0 10px; padding:10px;"><div class="fx-b"><div>#2 <strong>Citizen Y</strong></div><div style="color:var(--blue);">8500 💎</div></div></div>
+                    </div>
+                </div>
+            </div>
+            <div class="dtl">
+                <h4>6.2 Leaderboard</h4>
+                <ul><li>UI: Ranked list. Top 1 gets gold highlight.</li><li>Logic: Cron job sorts Karma scores hourly.</li></ul>
+            </div>
+        </div>
+
+        <!-- 6.3 Settings -->
+        <div>
+            <div class="ph"><div class="nt"></div>
+                <div class="sc">
+                    <div class="ab"><div>← Settings</div></div>
+                    <div style="padding:15px;">
+                        <div class="fx-b" style="padding:15px 0; border-bottom:1px solid var(--glass-br);">Dark Mode <span>Toggle</span></div>
+                        <div class="fx-b" style="padding:15px 0; border-bottom:1px solid var(--glass-br);">Req. Mohalla Change <span style="color:var(--blue);">➤</span></div>
+                    </div>
+                </div>
+            </div>
+            <div class="dtl">
+                <h4>6.3 Settings</h4>
+                <ul><li>UI: Standard list view with toggles.</li><li>Logic: Mohalla requests go to Admin 'Pending' table.</li></ul>
+            </div>
+        </div>
+
+        <!-- 6.4 Privacy -->
+        <div>
+            <div class="ph"><div class="nt"></div>
+                <div class="sc">
+                    <div class="ab"><div>← Privacy & T&C</div></div>
+                    <div style="padding:15px; font-size:0.8rem; color:var(--text-m);">
+                        <strong>1. Data Collection</strong><br>We collect basic details...<br><br><strong>2. Usage</strong><br>For ecosystem simulation...
+                    </div>
+                </div>
+            </div>
+            <div class="dtl">
+                <h4>6.4 Privacy Policy</h4>
+                <ul><li>UI: Text heavy, clean spacing.</li><li>Logic: Static page. Mandatory for App Store.</li></ul>
+            </div>
+        </div>
+
+        <!-- 6.5 Disclaimer -->
+        <div>
+            <div class="ph"><div class="nt"></div>
+                <div class="sc">
+                    <div class="ab"><div>← Disclaimer</div></div>
+                    <div style="padding:15px;">
+                        <div class="cd red-br" style="margin:0; background:rgba(239,68,68,0.1);">
+                            <h3 style="color:var(--red); margin:0 0 10px;">Notice</h3>
+                            <p class="txt-s" style="color:#fff;">This app is a VIRTUAL SIMULATION. Not affiliated with any Govt entity.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="dtl">
+                <h4>6.5 Disclaimer</h4>
+                <ul><li>UI: Red alert style box.</li><li>Logic: Acknowledgment saved in SharedPreferences.</li></ul>
+            </div>
+        </div>
+
+        <!-- 6.6 Dev Info -->
+        <div>
+            <div class="ph"><div class="nt"></div>
+                <div class="sc">
+                    <div class="ab"><div>← Developer Info</div></div>
+                    <div style="padding:15px; text-align:center;">
+                        <div style="margin-bottom:20px;"><strong>Diamondz Technologiez</strong><br><span class="txt-s">HQ: Kandhla</span></div>
+                        <div><strong>Hina Digital Solutions</strong><br><span class="txt-s">Design Partner</span></div>
+                    </div>
+                </div>
+            </div>
+            <div class="dtl">
+                <h4>6.6 Developer Info</h4>
+                <ul><li>UI: Logos and contact text.</li><li>Logic: Static informational screen.</li></ul>
+            </div>
+        </div>
+
+        <!-- 6.7 Engineered By -->
+        <div>
+            <div class="ph"><div class="nt"></div>
+                <div class="sc">
+                    <div class="ab" style="justify-content:center; color:var(--blue);">Engineered By</div>
+                    <div style="padding:15px;">
+                        <div class="cd" style="margin:0 0 10px; text-align:center;">
+                            <div class="av" style="width:50px;height:50px;margin:0 auto 10px; border:2px solid var(--blue);"></div>
+                            <div style="font-weight:bold;">Arqum Siddiqui</div><div class="txt-s" style="color:var(--gold);">CEO</div>
+                        </div>
+                        <div class="cd" style="margin:0; text-align:center;">
+                            <div class="av" style="width:50px;height:50px;margin:0 auto 10px; border:2px solid var(--blue);"></div>
+                            <div style="font-weight:bold;">Shaghil Siddiqui</div><div class="txt-s" style="color:var(--gold);">Operations</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="dtl">
+                <h4>6.7 Engineered By</h4>
+                <ul><li>UI: Circular avatars, designations.</li><li>Logic: Fetched from Django so team can update dynamically.</li></ul>
+            </div>
+        </div>
+
+        <!-- 6.8 Banned -->
+        <div>
+            <div class="ph" style="border-color:var(--red);"><div class="nt"></div>
+                <div class="sc" style="background:var(--red); align-items:center; justify-content:center; padding:20px; text-align:center;">
+                    <div style="font-size:3rem; margin-bottom:10px;">🚫</div>
+                    <h2>ACCOUNT RESTRICTED</h2>
+                    <p>Strike 2 Applied.</p>
+                    <div style="background:rgba(0,0,0,0.5); padding:10px; border-radius:8px; width:100%;">Unbans in: 23h 45m</div>
+                </div>
+            </div>
+            <div class="dtl">
+                <h4>6.8 Banned Notice</h4>
+                <ul><li>UI: Full screen red alert. Blocks navigation.</li><li>Logic: If `Ban_Until` > Now, this overrides the app UI.</li></ul>
+            </div>
+        </div>
+    </div>
+
+    <!-- 7. UTILITIES -->
+    <div class="cat-title">🛠️ 7. Utilities & Modals (5 Screens)</div>
+    <div class="grid">
+        
+        <!-- 7.1 Edit Profile -->
+        <div>
+            <div class="ph"><div class="nt"></div>
+                <div class="sc">
+                    <div class="ab"><div>✕ Edit Profile</div><div style="color:var(--blue);">Save</div></div>
+                    <div style="padding:15px;">
+                        <div class="av" style="width:60px;height:60px;margin:0 auto 20px;"></div>
+                        <label class="txt-s">Name</label><div class="inp">Arqum Siddiqui</div>
+                        <label class="txt-s" style="display:block; margin-top:15px;">Mohalla</label>
+                        <div class="inp" style="opacity:0.5;">Mohalla X 🔒</div>
+                    </div>
+                </div>
+            </div>
+            <div class="dtl">
+                <h4>7.1 Edit Profile</h4>
+                <ul><li>UI: Inputs. Mohalla is greyed out.</li><li>Logic: PUT request to User Table.</li></ul>
+            </div>
+        </div>
+
+        <!-- 7.2 Search -->
+        <div>
+            <div class="ph"><div class="nt"></div>
+                <div class="sc">
+                    <div style="padding:40px 15px 15px; border-bottom:1px solid var(--glass-br);"><div class="inp fx-b" style="margin:0;">Search citizens... <span>🔍</span></div></div>
+                    <div style="padding:15px;">
+                        <div class="txt-s" style="margin-bottom:10px;">Recent</div>
+                        <div class="fx" style="gap:10px; margin-bottom:10px;"><div class="av" style="width:25px;height:25px;"></div><span style="font-size:0.85rem;">Citizen Y</span></div>
+                    </div>
+                </div>
+            </div>
+            <div class="dtl">
+                <h4>7.2 Search / Discover</h4>
+                <ul><li>UI: Top search bar, live results list.</li><li>Logic: Debounced API query on Names & Content.</li></ul>
+            </div>
+        </div>
+
+        <!-- 7.3 Report -->
+        <div>
+            <div class="ph"><div class="nt"></div>
+                <div class="sc" style="background:rgba(0,0,0,0.5); justify-content:flex-end;">
+                    <div style="background:var(--bg-panel); padding:20px; border-radius:20px 20px 0 0;">
+                        <h4 style="margin:0 0 15px; color:var(--red);">Report User</h4>
+                        <div style="margin-bottom:10px;"><input type="radio"> Spam</div>
+                        <div style="margin-bottom:15px;"><input type="radio"> Abuse</div>
+                        <div class="btn" style="background:var(--red); width:100%;">Submit Report</div>
+                    </div>
+                </div>
+            </div>
+            <div class="dtl">
+                <h4>7.3 Report Bottom-Sheet</h4>
+                <ul><li>UI: Modal slides up. Radio buttons.</li><li>Logic: Sends ticket directly to Home Minister Queue.</li></ul>
+            </div>
+        </div>
+
+        <!-- 7.4 Image Viewer -->
+        <div>
+            <div class="ph"><div class="nt"></div>
+                <div class="sc" style="background:#000; justify-content:center; align-items:center;">
+                    <div style="position:absolute; top:40px; left:15px; font-size:1.2rem;">✕</div>
+                    <div style="width:100%; height:300px; background:#222; display:flex; align-items:center; justify-content:center;">[Pinch Zoom Image]</div>
+                </div>
+            </div>
+            <div class="dtl">
+                <h4>7.4 Image Viewer</h4>
+                <ul><li>UI: Pitch black bg.</li><li>Logic: Flutter's InteractiveViewer for pinch-to-zoom.</li></ul>
+            </div>
+        </div>
+
+        <!-- 7.5 Offline -->
+        <div>
+            <div class="ph"><div class="nt"></div>
+                <div class="sc" style="justify-content:center; align-items:center; text-align:center; padding:20px;">
+                    <div style="font-size:3rem; opacity:0.5; margin-bottom:10px;">📡</div>
+                    <h3>No Connection</h3>
+                    <p class="txt-s">Please check your internet.</p>
+                    <div class="btn" style="margin-top:10px;">Retry</div>
+                </div>
+            </div>
+            <div class="dtl">
+                <h4>7.5 Offline / Error</h4>
+                <ul><li>UI: Simple error graphic.</li><li>Logic: Dio interceptor catches network fail and routes here.</li></ul>
+            </div>
+        </div>
+    </div>
+
+</div>
+</body>
+</html>

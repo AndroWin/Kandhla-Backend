@@ -1,0 +1,515 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>City & Mohalla Simulation App - Ultimate Blueprint</title>
+    <style>
+        :root {
+            --primary: #ffffff;
+            --bg-gradient: linear-gradient(135deg, #0f172a, #1e1b4b, #000000);
+            --glass-bg: rgba(255, 255, 255, 0.03);
+            --glass-border: rgba(255, 255, 255, 0.08);
+            --accent-blue: #38bdf8;
+            --accent-gold: #fbbf24;
+            --sm-ruby: linear-gradient(135deg, #991b1b 0%, #dc2626 100%); /* Maroon/Red */
+            --cabinet-ruby: linear-gradient(135deg, #7e22ce 0%, #c026d3 100%); /* Violet */
+            --mm-ruby: linear-gradient(135deg, #166534 0%, #22c55e 100%); /* Green */
+            --mm-cabinet-ruby: linear-gradient(135deg, #4b5563 0%, #9ca3af 100%); /* Grey */
+            --gold-gradient: linear-gradient(90deg, #d4af37, #f3e5ab, #d4af37);
+        }
+
+        body {
+            margin: 0;
+            padding: 0;
+            font-family: 'Segoe UI', system-ui, -apple-system, sans-serif;
+            background: var(--bg-gradient);
+            background-attachment: fixed;
+            color: var(--primary);
+            line-height: 1.7;
+        }
+
+        header {
+            text-align: center;
+            padding: 4rem 2rem;
+            background: rgba(0, 0, 0, 0.4);
+            backdrop-filter: blur(12px);
+            border-bottom: 1px solid var(--glass-border);
+        }
+
+        h1 {
+            font-size: 2.8rem;
+            margin-bottom: 0.5rem;
+            background: linear-gradient(90deg, #e2e8f0, #94a3b8);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 2rem;
+        }
+
+        .glass-card {
+            background: var(--glass-bg);
+            backdrop-filter: blur(20px);
+            -webkit-backdrop-filter: blur(20px);
+            border: 1px solid var(--glass-border);
+            border-radius: 24px;
+            padding: 2.5rem;
+            margin-bottom: 2.5rem;
+            box-shadow: 0 10px 40px 0 rgba(0, 0, 0, 0.4);
+            transition: transform 0.3s ease;
+        }
+
+        .glass-card:hover {
+            transform: translateY(-5px);
+            border-color: rgba(255, 255, 255, 0.15);
+        }
+
+        h2 {
+            color: var(--accent-blue);
+            border-bottom: 1px solid var(--glass-border);
+            padding-bottom: 0.8rem;
+            margin-top: 0;
+            font-size: 1.8rem;
+        }
+
+        h3 {
+            color: #f8fafc;
+            margin-top: 1.8rem;
+            font-size: 1.3rem;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .feature-grid {
+            display: grid;
+            grid-template-columns: 1fr;
+            gap: 2rem;
+        }
+
+        @media (min-width: 768px) {
+            .feature-grid {
+                grid-template-columns: 1fr 1fr;
+            }
+        }
+        
+        .full-width-grid {
+            display: grid;
+            grid-template-columns: 1fr;
+            gap: 1rem;
+        }
+
+        ul {
+            list-style: none;
+            padding-left: 0;
+        }
+
+        ul li {
+            position: relative;
+            padding-left: 28px;
+            margin-bottom: 12px;
+            color: #cbd5e1;
+        }
+
+        ul li::before {
+            content: '✦';
+            position: absolute;
+            left: 0;
+            color: var(--accent-blue);
+        }
+
+        ul li strong {
+            color: #f8fafc;
+        }
+
+        .badge-preview {
+            display: inline-block;
+            padding: 8px 20px;
+            border-radius: 30px;
+            font-size: 0.95rem;
+            font-weight: 600;
+            margin: 5px;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.5);
+            border: 1px solid rgba(255,255,255,0.2);
+            text-shadow: 1px 1px 2px rgba(0,0,0,0.5);
+        }
+
+        .ruby-sm { background: var(--sm-ruby); border: 2px solid #d4af37; animation: shine 3s infinite linear;}
+        .ruby-cabinet { background: var(--cabinet-ruby); }
+        .ruby-mm { background: var(--mm-ruby); }
+        .ruby-mm-cabinet { background: var(--mm-cabinet-ruby); }
+
+        @keyframes shine {
+            0% { box-shadow: 0 0 5px rgba(212, 175, 55, 0.2); }
+            50% { box-shadow: 0 0 20px rgba(212, 175, 55, 0.8); }
+            100% { box-shadow: 0 0 5px rgba(212, 175, 55, 0.2); }
+        }
+
+        .timeline-box {
+            background: rgba(0, 0, 0, 0.3);
+            border-left: 4px solid var(--accent-blue);
+            padding: 1.5rem;
+            border-radius: 0 16px 16px 0;
+            margin-top: 1.5rem;
+        }
+
+        .timeline-box h4 {
+            margin-top: 0;
+            color: #e2e8f0;
+        }
+
+        .alert-box {
+            background: rgba(220, 38, 38, 0.1);
+            border-left: 4px solid #dc2626;
+            padding: 1.5rem;
+            border-radius: 0 16px 16px 0;
+            margin-top: 1.5rem;
+        }
+
+        .constitution-box {
+            background: rgba(10, 15, 30, 0.9);
+            border: 1px solid #d4af37;
+            padding: 2rem;
+            border-radius: 12px;
+            margin-top: 1.5rem;
+            position: relative;
+            overflow: hidden;
+            box-shadow: inset 0 0 50px rgba(212, 175, 55, 0.05);
+        }
+
+        .constitution-box::before {
+            content: '🏛️';
+            position: absolute;
+            font-size: 15rem;
+            opacity: 0.03;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            pointer-events: none;
+        }
+
+        .const-title {
+            color: transparent;
+            background: var(--gold-gradient);
+            -webkit-background-clip: text;
+            text-align: center;
+            font-family: 'Georgia', serif;
+            font-size: 2rem;
+            border-bottom: 1px solid rgba(212, 175, 55, 0.3);
+            padding-bottom: 1rem;
+        }
+
+        .department-box {
+            background: rgba(255,255,255,0.02);
+            border: 1px solid rgba(255,255,255,0.05);
+            padding: 1rem;
+            border-radius: 10px;
+            margin-bottom: 10px;
+        }
+        
+        .department-box h4 {
+            margin: 0 0 10px 0;
+            color: var(--accent-blue);
+        }
+    </style>
+</head>
+<body>
+
+    <header>
+        <h1>City & Mohalla Ecosystem - Ultimate Blueprint</h1>
+        <p>A highly detailed breakdown of user features, election simulations, and admin controls.</p>
+        <p><strong>Tech Stack:</strong> Flutter (Frontend) | Django (Backend API & Admin Panel) | Firebase (Real-time DB & FCM)</p>
+    </header>
+
+    <div class="container">
+
+        <!-- ZERO: App Store Compliance -->
+        <div class="glass-card">
+            <h2>0. Legal & App Store Compliance (CRITICAL)</h2>
+            <div class="alert-box">
+                <h4>Voter Slip Policy</h4>
+                <p><strong>Strict Directive:</strong> Google Play Store aur Apple App Store ki government impersonation guidelines ko follow karte hue, "Digital Voter Slip" ya kisi bhi tarah ka fake voter ID feature app se <strong>puri tarah aur hamesha ke liye remove kar diya gaya he</strong>. Ye feature na abhi aayega aur na hi kisi future release me add kiya jayega. Voting puri tarah se app ke internal digital secure poll system par aadharit hogi.</p>
+            </div>
+        </div>
+
+        <!-- 1. Authentication & Onboarding -->
+        <div class="glass-card">
+            <h2>1. User Authentication & Mohalla Assignment</h2>
+            <div class="feature-grid">
+                <div>
+                    <h3>User Flow (Flutter App)</h3>
+                    <ul>
+                        <li><strong>Signup Via Google:</strong> 1-Tap secure login. No fake manual emails.</li>
+                        <li><strong>Device ID Binding:</strong> Ek phone se sirf ek account ki vote register hogi (Fraud prevention).</li>
+                        <li><strong>Mohalla Selection:</strong> Profile banate waqt user dropdown se apni city aur Mohalla select karega, aur turant wahan add ho jayega.</li>
+                        <li><strong>No Self-Change:</strong> Ek bar mohalla set hone ke baad user khud change nahi kar sakta. Change karne ke liye Django Admin ko "Request" dalni hogi, jise admin verify karke approve/decline karega.</li>
+                    </ul>
+                </div>
+                <div>
+                    <h3>Admin & Ecosystem Link</h3>
+                    <ul>
+                        <li><strong>Mohalla Freeze:</strong> Jab chunav date announce hogi, sabhi Mohalla change requests automatically block/freeze ho jayengi.</li>
+                        <li><strong>City Unique ID:</strong> Har city ka apna alag independent ecosystem hoga (e.g., Kandhla ki alag feed aur database tables).</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+
+        <!-- 2. Community Feed & Interactions -->
+        <div class="glass-card">
+            <h2>2. Mohalla Feed, Interactions & Concerns</h2>
+            <div class="feature-grid">
+                <div>
+                    <h3>Within Own Mohalla</h3>
+                    <ul>
+                        <li><strong>Post Types:</strong> Text, Photos, aur Polls (Video abhi nahi hogi).</li>
+                        <li><strong>Concerns (Samasya):</strong> User issue ki photo aur details dekar Concern raise karega. Log us par <strong>"Support"</strong> ya <strong>"Do Not Support"</strong> par interact karenge.</li>
+                        <li><strong>Like/Dislike:</strong> Har post par Like aur Dislike ka option hoga.</li>
+                        <li><strong>Credibility Score:</strong> Users aur Leaders ko mile Likes, Support aur kiye gaye achhe kaamon se unki Credibility badhegi. Minus (Dislikes) aane par kam hogi. Ye score chunav me parcha bharne ke liye matter karega.</li>
+                    </ul>
+                </div>
+                <div>
+                    <h3>Cross-Mohalla Interactions</h3>
+                    <ul>
+                        <li><strong>View Access:</strong> User dropdown se dusre mohalle select karke dekh payega ki wahan kya chal raha he.</li>
+                        <li><strong>Limited Interaction:</strong> Wahan jakar <strong>Like, Dislike, Support, Do Not Support</strong> kar sakega, lekin <strong>Comment nahi kar sakega</strong> (Aapsi takrav rokne ke liye).</li>
+                        <li><strong>Anonymity:</strong> Dusre mohalle me dikhega ki "15 Likes from Mohalla X", lekin kis user ne kiye, unke naam show nahi honge.</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+
+        <!-- 3. The City Election (Supreme Minister) -->
+        <div class="glass-card">
+            <h2>3. The City Election (Supreme Minister - Har 3 Maheene me)</h2>
+            <p>Puri city ka maha-chunav jiska aayojan City Election Commission (Admin Panel) karega.</p>
+            
+            <div class="timeline-box">
+                <h4>Exact 15-Day Timeline Flow</h4>
+                <ul>
+                    <li><strong>Day 1 to 5 (Parcha/Nomination):</strong> Chunav aayog date nikalega. Har mohalle se log parcha bhar sakenge. 5 din baad form link auto-close.</li>
+                    <li><strong>Day 6 (Allocation):</strong> Admin panel se verify karke top 30 logo ko "Seats and Symbols" allocate kiye jayenge.</li>
+                    <li><strong>Day 6 to 10 (Prachar):</strong> Candidates app me apna zor-dar prachar-prasar karenge.</li>
+                    <li><strong>Day 11 (Achaar Sanhita):</strong> Pure app par Achaar Sanhita lag jayegi. Koi naya post ya prachar nahi hoga. App lock mode me jayegi.</li>
+                    <li><strong>Day 12 & 13 (Voting):</strong> 2 din tak voting chalegi. 1 Aadmi = 1 Vote. Secret ballot system.</li>
+                    <li><strong>Day 14 (Counting & Result):</strong> Achaar Sanhita hategi, post karna shuru hoga. Counting hogi aur app par naye Supreme Minister ka result sabke samne aayega.</li>
+                    <li><strong>Day 15 (Oath & Cabinet):</strong> Naya Supreme Minister Oath lega. Wo apni cabinet banayega jisme <strong>adhiktam 11 log</strong> ho sakenge.</li>
+                </ul>
+            </div>
+        </div>
+
+        <!-- 4. The Mohalla Election (Mohalla Minister) -->
+        <div class="glass-card">
+            <h2>4. The Mohalla Election (Har Maheene)</h2>
+            <p>Mohalle ki local sarkar. Parcha sirf usi mohalle ke log bhar sakenge.</p>
+
+            <div class="timeline-box">
+                <h4>Exact 11-Day Timeline Flow</h4>
+                <ul>
+                    <li><strong>Day 1 to 2 (Parcha):</strong> Sirf 2 din parcha bharne ka time.</li>
+                    <li><strong>Day 3 (Allocation):</strong> Symbols aur Seats allocate hongi.</li>
+                    <li><strong>Day 4 to 8 (Prachar):</strong> 5 din tak mohalle me prachar.</li>
+                    <li><strong>Day 9 (Achaar Sanhita):</strong> Sirf usi mohalle me achaar sanhita lagegi aur feed lock hogi.</li>
+                    <li><strong>Day 10 (Voting, Counting & Result):</strong> Ek hi din me votes dalengi, counting hogi aur result jari hoga.</li>
+                    <li><strong>Day 11 (Oath & Cabinet):</strong> Mohalla Minister ki Oath hogi aur wo apni cabinet me <strong>5 log</strong> select karega.</li>
+                </ul>
+            </div>
+        </div>
+
+        <!-- 5. VIP Profiles, Frames & 3D Badges -->
+        <div class="glass-card">
+            <h2>5. VIP Profiles, Frames & 3D Badges Logic</h2>
+            <p>Chune gaye leaders ko premium profile UI aur distinct visual hierarchy milegi (Glassmorphism + 3D effects).</p>
+
+            <div style="margin-top: 1.5rem; margin-bottom: 1.5rem;">
+                <span class="badge-preview ruby-sm">Supreme Minister: Maroon/White Verified + 3D Chamakta Red Ruby</span>
+                <span class="badge-preview ruby-cabinet">SM Cabinet (11): Violet 3D Chamkta Ruby</span>
+                <span class="badge-preview ruby-mm">Mohalla Minister: Green 3D Ruby</span>
+                <span class="badge-preview ruby-mm-cabinet">MM Cabinet (5): Grey 3D Ruby</span>
+            </div>
+            <ul>
+                <li><strong>Supreme Minister UI:</strong> Profile kholte hi sabse upar chamakta hua text aayega: <strong>"👑 Supreme Minister of [City Name]"</strong>. Uska frame Dark Maroon & Gold hoga jisme continuous slow-shining animation chalegi.</li>
+                <li><strong>Cabinet Ministers UI:</strong> Profile aur post me naam ke theek niche bold letters me tag show hoga. Example: <em>Arham Siddiqui</em> -> niche tag: <strong>"🛡️ Home Minister of [City]"</strong>. Frame Violet Glassmorphism ka hoga.</li>
+                <li><strong>Mohalla Minister UI:</strong> Dark Green & Silver metallic frame. Tag: <strong>"🟢 Mohalla Minister of [Mohalla Name]"</strong>.</li>
+            </ul>
+        </div>
+
+        <!-- 6. Privileges & Detailed Cabinet Departments -->
+        <div class="glass-card">
+            <h2>6. Privileges & Detailed Cabinet Departments</h2>
+            
+            <h3>👑 Supreme Minister (City Leader) Privileges</h3>
+            <ul>
+                <li><strong>God Mode View:</strong> Kisi bhi mohalle me post, comment, like aur interact kar sakega.</li>
+                <li><strong>Give Orders:</strong> Kisi bhi mohalle ko direct "Orders" de payega jo us mohalle me highlight honge.</li>
+                <li><strong>Flagging/Shadow Ban Request:</strong> Kisi bhi user ko Flag ya Shadow ban karne ki direct power. (Report admin panel me jayegi, Admin ka faisla antim hoga. Admin accept karke restrict ya decline kar sakta he).</li>
+            </ul>
+
+            <h3>🛡️ Supreme Cabinet (11 Members) - Violet Ruby</h3>
+            <div class="full-width-grid">
+                <div class="department-box">
+                    <h4>1. Grah Mantri (Home Minister)</h4>
+                    <p><strong>Privilege:</strong> Moderation ka sabse bada adhikari. Kisi ki 1st strike (6 hours shadow ban) ko directly approve karna. Hate speech reports ko priority par dekhna.</p>
+                </div>
+                <div class="department-box">
+                    <h4>2. Vikas Mantri (Public Works Minister)</h4>
+                    <p><strong>Privilege:</strong> Har mohalle se aane wale "Concerns" filter karna. Valid concerns ko "City Priority" tag dekar highlight karna.</p>
+                </div>
+                <div class="department-box">
+                    <h4>3. Suchna aur Prasaran Mantri (I&B Minister)</h4>
+                    <p><strong>Privilege:</strong> City ke sabhi mohallo me "Official Announcements" broadcast karna aur Push Notifications shoot karna.</p>
+                </div>
+                <div class="department-box">
+                    <h4>4. Kanun Mantri (Law & Justice Minister)</h4>
+                    <p><strong>Privilege:</strong> Banned users ki appeals ko review karna. City Samvidhan ke rules enforce karwana.</p>
+                </div>
+                <div class="department-box">
+                    <h4>5. Jan-Shikayat Mantri (Grievance Minister)</h4>
+                    <p><strong>Privilege:</strong> Cross-mohalla disputes handle karna. Takrav karne wale users ko special warning dena.</p>
+                </div>
+                <div class="department-box">
+                    <h4>6. Sanskritik Mantri (Cultural & Events Minister)</h4>
+                    <p><strong>Privilege:</strong> Pure city ke liye special mega-polls aur digital competitions create karna.</p>
+                </div>
+                <div class="department-box">
+                    <h4>7. Swasthya evam Safai Mantri (Health & Sanitation)</h4>
+                    <p><strong>Privilege:</strong> Kachre/bimariyo se jude concerns ko red-alert tag lagana.</p>
+                </div>
+                <div class="department-box">
+                    <h4>8. Shiksha evam Yuva Mantri (Education & Youth)</h4>
+                    <p><strong>Privilege:</strong> Students aur youth se judi jankariyo aur posts ko city feed me upar rank karwana.</p>
+                </div>
+                <div class="department-box">
+                    <h4>9. Nagar Suraksha Mantri (Safety & Vigilance)</h4>
+                    <p><strong>Privilege:</strong> App me chal rahe spam ya scam posts ko ek click me hide (takedown) karna (Admin review ke liye).</p>
+                </div>
+                <div class="department-box">
+                    <h4>10. Vitt Mantri (Finance Minister)</h4>
+                    <p><strong>Privilege:</strong> App par chalne wale local ads (Jaise Janta Dry Clean) ki performance aur transparency reports dekhna.</p>
+                </div>
+                <div class="department-box">
+                    <h4>11. Takniki Mantri (IT & App Minister)</h4>
+                    <p><strong>Privilege:</strong> Bugs ya feature suggestions ko direct Master Admin/Developer ke dashboard me push karna.</p>
+                </div>
+            </div>
+
+            <h3 style="margin-top: 2rem;">🟢 Mohalla Cabinet (5 Members) - Grey Ruby</h3>
+            <div class="full-width-grid">
+                <div class="department-box">
+                    <h4>1. Up-Mantri (Deputy Mohalla Minister)</h4>
+                    <p><strong>Privilege:</strong> Agar Mohalla Minister active nahi he ya banned he, to mohalle ki primary feed aur control manage karna.</p>
+                </div>
+                <div class="department-box">
+                    <h4>2. Mohalla Vikas Prabhari (Infra Head)</h4>
+                    <p><strong>Privilege:</strong> Mohalle ki "Concerns" ki sachai verify karna aur genuine hone par City Vikas Mantri ko forward karna.</p>
+                </div>
+                <div class="department-box">
+                    <h4>3. Mohalla Shanti Prabhari (Moderation Head)</h4>
+                    <p><strong>Privilege:</strong> Mohalle me gaali-galoch ya ladai wali posts ko flag karke seedha City Grah Mantri ko report bhejna.</p>
+                </div>
+                <div class="department-box">
+                    <h4>4. Mohalla Suchna Prabhari (PR Head)</h4>
+                    <p><strong>Privilege:</strong> Mohalle ki top feed me local news, shadi cards, ya chhote announcements pin karna.</p>
+                </div>
+                <div class="department-box">
+                    <h4>5. Mohalla Jan-Sampark (Community Head)</h4>
+                    <p><strong>Privilege:</strong> Naye users ke aane par automatic welcome post generate karna aur local polls chalana.</p>
+                </div>
+            </div>
+
+            <h3 style="margin-top: 2rem;">🕵️ Anonymous Whistleblower</h3>
+            <ul>
+                <li>Kisi bhi user ke paas option hoga ki wo kisi illegal activity ko anonymously report kar sake bina identity reveal kiye (Sirf Admin/SM ye dekh sakenge ki kon user he baqi sabko anonymous post dikhegi but mohalla show hoga).</li>
+            </ul>
+        </div>
+
+        <!-- 7. Moderation, Bans & Master Admin -->
+        <div class="glass-card">
+            <h2>7. Moderation, Strike System & Admin Panels</h2>
+            <div class="feature-grid">
+                <div>
+                    <h3>3-Strike Rule & Filtering</h3>
+                    <ul>
+                        <li><strong>Blocked Words:</strong> Admin panel me words ki list hogi. User wo gali/word type karega to post nahi hogi.</li>
+                        <li><strong>Abusive Behavior Penalties:</strong>
+                            <ol>
+                                <li>Pehli baar: <strong>6 Ghante Shadow Ban</strong> (Reason ke sath).</li>
+                                <li>Dusri baar: <strong>24 Ghante Ban</strong>.</li>
+                                <li>Teesri baar: <strong>3 Din Ban</strong>.</li>
+                                <li>Chauthi baar: <strong>Permanent Ban</strong>. Us user ko mohalle me "Featured Banned Profile" dikhaya jayega as an example.</li>
+                            </ol>
+                        </li>
+                    </ul>
+                </div>
+                <div>
+                    <h3>Master Admin vs City Election Commission</h3>
+                    <ul>
+                        <li><strong>Master Admin:</strong> Nayi cities, colonies add, update aur delete karega (CRUD). Admin se direct kisi bhi mohalle me global post daal sakega (Ad ya Announcement) jo sabse top par pin hogi.</li>
+                        <li><strong>City Admin (Election Commission):</strong> Ye har city ka apna independent panel hoga. Ye chunav ki dates dalenge, application approve/disapprove karenge, symbols and seats denge. Voting management aur counting inke panel me hogi.</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+
+        <!-- 8. Premium Constitution (Samvidhan) & Notifications -->
+        <div class="glass-card">
+            <h2>8. Premium City Samvidhan & Notifications</h2>
+            
+            <div class="feature-grid">
+                <div>
+                    <h3>Targeted Notifications (FCM) & Ads</h3>
+                    <ul>
+                        <li><strong>Monetization:</strong> Admin kisi bhi mohalle me top par local ads (Jaise Janta Dry Clean, Laundry, etc.) pin kar sakega aur exact impressions/clicks track karega.</li>
+                        <li><strong>FCM Targeting:</strong> Admin ya Cabinet se bheje gaye push notifications target kiye ja sakenge: Ya to puri city ko, ya sirf ek specific mohalle ko, ya kisi ek specific user ko.</li>
+                    </ul>
+                </div>
+                <div>
+                    <h3>Samvidhan System (Backend)</h3>
+                    <ul>
+                        <li>Har city ka ek Samvidhan hoga jise Admin panel ke rich text editor se update kiya jayega.</li>
+                        <li>Naye user ko is samvidhan par "I pledge to abide by the City Samvidhan" agree karke hi app me entry milegi.</li>
+                    </ul>
+                </div>
+            </div>
+
+            <!-- Premium Constitution UI Display -->
+            <div class="constitution-box">
+                <div class="const-title">City Samvidhan (Constitution)</div>
+                <div style="margin-top: 1.5rem; font-family: 'Georgia', serif; font-size: 1.1rem; line-height: 1.8; color: #e2e8f0;">
+                    <p style="text-align: center; color: var(--accent-gold); font-style: italic;">
+                        "Hum, Kandhla ke digital nagrik, is app ko ek nishpaksh aur shanti-purna ecosystem banane ka sankalp lete hen..."
+                    </p>
+                    
+                    <h4 style="color: var(--accent-gold); margin-bottom: 5px; font-size: 1.3rem;">Act 1: Nagriko ke Mool Adhikar</h4>
+                    <div style="padding-left: 15px; border-left: 2px solid rgba(212, 175, 55, 0.3);">
+                        <p style="margin: 5px 0; color: #38bdf8;"><strong>Clause 1.1: Post karne ki azadi</strong></p>
+                        <p style="margin: 5px 0 15px 15px; font-family: 'Segoe UI', sans-serif; font-size: 0.95rem;">
+                            <strong>Sub-clause 1.1(a):</strong> Koi bhi user achaar sanhita ke alawa kabhi bhi apne mohalle me post kar sakta he.<br>
+                            <strong>Sub-clause 1.1(b):</strong> Cross-mohalla interactions me keval like/dislike/support anumanya hoga.
+                        </p>
+                    </div>
+
+                    <h4 style="color: var(--accent-gold); margin-bottom: 5px; font-size: 1.3rem;">Act 2: Chunavi Niyam</h4>
+                    <div style="padding-left: 15px; border-left: 2px solid rgba(212, 175, 55, 0.3);">
+                        <p style="margin: 5px 0; color: #38bdf8;"><strong>Clause 2.1: Chunav Prakriya</strong></p>
+                        <p style="margin: 5px 0 15px 15px; font-family: 'Segoe UI', sans-serif; font-size: 0.95rem;">
+                            <strong>Sub-clause 2.1(a):</strong> Voting puri tarah gupt (secret ballot) aur internal system par aadharit hogi. Koi digital voter slip pradan nahi ki jayegi.
+                        </p>
+                    </div>
+                </div>
+                <div style="text-align: right; margin-top: 1rem;">
+                    <button style="background: var(--accent-gold); color: #000; border: none; padding: 8px 15px; border-radius: 5px; font-weight: bold; cursor: pointer;">Copy & Share Clause</button>
+                </div>
+            </div>
+            <p style="margin-top: 10px; font-size: 0.9rem; color: #94a3b8;">*Users specific Act/Clause ko copy karke directly mohalle me share kar sakenge taki behes hone par hawala (reference) de saken.</p>
+
+        </div>
+
+    </div>
+
+</body>
+</html>

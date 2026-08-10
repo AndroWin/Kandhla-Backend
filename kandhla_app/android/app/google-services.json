@@ -1,0 +1,48 @@
+{
+  "project_info": {
+    "project_number": "881010318377",
+    "project_id": "diz-chunaav-app",
+    "storage_bucket": "diz-chunaav-app.firebasestorage.app"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:881010318377:android:803763421827a895889038",
+        "android_client_info": {
+          "package_name": "com.example.chunav_connect"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDkRQUoBYs6YYpr85y1SqoZVZqr_cAMGTM"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    },
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:881010318377:android:8247c5cd89b4b6b4889038",
+        "android_client_info": {
+          "package_name": "com.example.kandhla_app"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDkRQUoBYs6YYpr85y1SqoZVZqr_cAMGTM"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

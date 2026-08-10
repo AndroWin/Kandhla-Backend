@@ -1,0 +1,345 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Development Architecture - City Simulation App</title>
+    <style>
+        :root {
+            --primary: #ffffff;
+            --bg-gradient: linear-gradient(135deg, #09090b, #18181b, #27272a);
+            --glass-bg: rgba(255, 255, 255, 0.04);
+            --glass-border: rgba(255, 255, 255, 0.08);
+            --accent-cyan: #22d3ee;
+            --accent-purple: #c084fc;
+            --accent-green: #4ade80;
+            --accent-orange: #fb923c;
+            --box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.3);
+        }
+
+        body {
+            margin: 0;
+            padding: 0;
+            font-family: 'Segoe UI', system-ui, -apple-system, sans-serif;
+            background: var(--bg-gradient);
+            background-attachment: fixed;
+            color: var(--primary);
+            line-height: 1.6;
+        }
+
+        header {
+            text-align: center;
+            padding: 3rem 2rem;
+            background: rgba(0, 0, 0, 0.5);
+            backdrop-filter: blur(15px);
+            border-bottom: 1px solid var(--glass-border);
+        }
+
+        h1 {
+            font-size: 2.6rem;
+            margin-bottom: 0.5rem;
+            background: linear-gradient(90deg, #22d3ee, #c084fc);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 2rem;
+        }
+
+        .glass-card {
+            background: var(--glass-bg);
+            backdrop-filter: blur(20px);
+            -webkit-backdrop-filter: blur(20px);
+            border: 1px solid var(--glass-border);
+            border-radius: 20px;
+            padding: 2.5rem;
+            margin-bottom: 2.5rem;
+            box-shadow: var(--box-shadow);
+        }
+
+        h2 {
+            color: var(--accent-cyan);
+            border-bottom: 1px solid var(--glass-border);
+            padding-bottom: 0.8rem;
+            margin-top: 0;
+            font-size: 1.7rem;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        h3 {
+            color: #f1f5f9;
+            margin-top: 1.5rem;
+            font-size: 1.2rem;
+        }
+
+        .grid-2 {
+            display: grid;
+            grid-template-columns: 1fr;
+            gap: 2rem;
+        }
+
+        @media (min-width: 768px) {
+            .grid-2 {
+                grid-template-columns: 1fr 1fr;
+            }
+        }
+
+        .grid-3 {
+            display: grid;
+            grid-template-columns: 1fr;
+            gap: 1.5rem;
+        }
+
+        @media (min-width: 992px) {
+            .grid-3 {
+                grid-template-columns: repeat(3, 1fr);
+            }
+        }
+
+        .tech-box {
+            background: rgba(0,0,0,0.4);
+            border: 1px solid rgba(255,255,255,0.1);
+            padding: 1.5rem;
+            border-radius: 12px;
+            border-top: 3px solid;
+        }
+        
+        .tech-box.flutter { border-top-color: var(--accent-cyan); }
+        .tech-box.django { border-top-color: var(--accent-green); }
+        .tech-box.firebase { border-top-color: var(--accent-orange); }
+
+        ul {
+            list-style: none;
+            padding-left: 0;
+        }
+
+        ul li {
+            position: relative;
+            padding-left: 25px;
+            margin-bottom: 12px;
+            color: #cbd5e1;
+            font-size: 0.95rem;
+        }
+
+        ul li::before {
+            content: '⚙️';
+            position: absolute;
+            left: 0;
+            font-size: 0.9rem;
+        }
+
+        ul li strong {
+            color: #f8fafc;
+        }
+
+        .flowchart {
+            background: rgba(255,255,255,0.02);
+            padding: 2rem;
+            border-radius: 12px;
+            border: 1px dashed var(--glass-border);
+            text-align: center;
+            margin-top: 1.5rem;
+            color: #94a3b8;
+        }
+
+        .flow-step {
+            display: inline-block;
+            background: rgba(34, 211, 238, 0.1);
+            color: var(--accent-cyan);
+            padding: 10px 20px;
+            border-radius: 8px;
+            border: 1px solid rgba(34, 211, 238, 0.3);
+            margin: 5px;
+            font-weight: bold;
+        }
+
+        .flow-arrow {
+            display: inline-block;
+            color: #64748b;
+            margin: 0 10px;
+        }
+
+        .phase-box {
+            background: linear-gradient(90deg, rgba(255,255,255,0.03), transparent);
+            border-left: 4px solid var(--accent-purple);
+            padding: 1.5rem;
+            margin-bottom: 1rem;
+            border-radius: 0 12px 12px 0;
+        }
+        
+        .phase-box h4 { margin: 0 0 10px 0; color: var(--accent-purple); font-size: 1.1rem; }
+    </style>
+</head>
+<body>
+
+    <header>
+        <h1>Development Architecture & Structure</h1>
+        <p>Technical blueprint: How the ecosystem is built, how data flows, and development milestones.</p>
+    </header>
+
+    <div class="container">
+
+        <!-- 1. The Tech Stack Engine -->
+        <div class="glass-card">
+            <h2>1. Core Tech Stack (The Engine Room)</h2>
+            <p>App ko scalable aur smooth banane ke liye hum in 3 major technologies ka ecosystem banayenge:</p>
+            
+            <div class="grid-3">
+                <div class="tech-box flutter">
+                    <h3 style="color: var(--accent-cyan); margin-top: 0;">Flutter (Frontend)</h3>
+                    <p>User App ka UI aur animations handle karega.</p>
+                    <ul>
+                        <li><strong>State Management:</strong> Provider ya Riverpod (Real-time changes handle karne ke liye).</li>
+                        <li><strong>UI/UX:</strong> Custom Paint aur BackdropFilter (Glassmorphism aur 3D ruby effects ke liye).</li>
+                        <li><strong>Local Cache:</strong> Hive ya SharedPreferences (Taaki offline ya slow internet me feed instantly load ho).</li>
+                    </ul>
+                </div>
+                <div class="tech-box django">
+                    <h3 style="color: var(--accent-green); margin-top: 0;">Django & Python (Backend)</h3>
+                    <p>App ka dimag (Brain). Saara logic aur master data yahan process hoga.</p>
+                    <ul>
+                        <li><strong>Database:</strong> PostgreSQL (Heavy relational data, Users, Posts, aur City/Mohalla tracking ke liye best).</li>
+                        <li><strong>API:</strong> Django REST Framework (DRF) JSON format me Flutter ko data dega.</li>
+                        <li><strong>Background Jobs:</strong> Celery + Redis (Election phases change karne aur bans lagane ke liye).</li>
+                    </ul>
+                </div>
+                <div class="tech-box firebase">
+                    <h3 style="color: var(--accent-orange); margin-top: 0;">Firebase (Real-time Layer)</h3>
+                    <p>Instant actions bina delay ke dikhane ke liye.</p>
+                    <ul>
+                        <li><strong>Real-time DB:</strong> Sirf Like aur Support counters yahan rahenge taki click karte hi sabko update dikhe.</li>
+                        <li><strong>Authentication:</strong> Google Sign-In backend verification ke liye.</li>
+                        <li><strong>FCM:</strong> Push Notifications (Achaar Sanhita, Election Results, Warnings).</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+
+        <!-- 2. The Architecture Flow -->
+        <div class="glass-card">
+            <h2>2. System Architecture Flow (Kaam Kaise Karega?)</h2>
+            
+            <div class="grid-2">
+                <div>
+                    <h3>A. Data Sync Flow (Hybrid Approach)</h3>
+                    <ul>
+                        <li>Jab user feed kholta he, Flutter pehle <strong>Django API</strong> se post ka text, images aur author fetch karega.</li>
+                        <li>Uske turant baad, us post ki ID ke through <strong>Firebase</strong> se real-time "Likes" aur "Support" count fetch honge.</li>
+                        <li><strong>Fayda:</strong> Agar hazaar log ek sath kisi post par Like button daba rahe hen, to Django server crash nahi hoga. Saara load Firebase ka real-time engine sambhal lega, aur har raat Django Firebase se data sync karke apne paas permanent save kar lega.</li>
+                    </ul>
+                </div>
+                <div>
+                    <h3>B. Election Automated Engine (Celery)</h3>
+                    <ul>
+                        <li>Election dates manually handle karna impossible he. Iske liye hum <strong>Celery Beat</strong> (Task Scheduler) ka use karenge.</li>
+                        <li>Agar chunav aayog ne date fix ki he, to Celery theek raat 12:00 AM par trigger hoga.</li>
+                        <li><strong>Example:</strong> Day 11 ki raat 12 baje, Celery automatically database me `is_code_of_conduct_active = True` kar dega. Agle hi second Flutter app post karne ka button disable kar degi.</li>
+                    </ul>
+                </div>
+            </div>
+
+            <div class="flowchart">
+                <p style="margin-bottom: 10px;"><strong>Voting Day Data Flow (Crash Prevention System)</strong></p>
+                <div class="flow-step">User Clicks Vote</div>
+                <div class="flow-arrow">➔</div>
+                <div class="flow-step">Device ID Verify</div>
+                <div class="flow-arrow">➔</div>
+                <div class="flow-step">Sent to Redis Queue (Line me lagna)</div>
+                <div class="flow-arrow">➔</div>
+                <div class="flow-step">Django saves Vote smoothly</div>
+                <div class="flow-arrow">➔</div>
+                <div class="flow-step">Success Notification</div>
+            </div>
+        </div>
+
+        <!-- 3. Database Structure -->
+        <div class="glass-card">
+            <h2>3. Database Models (PostgreSQL Schema)</h2>
+            <p>Django me jo tables banengi unka high-level structure:</p>
+            
+            <div class="grid-2">
+                <div>
+                    <ul>
+                        <li><strong>User Table:</strong> Google_ID, Device_ID, Name, Image, Credibility_Score, Role (Citizen/Minister), Strike_Count, Ban_Until.</li>
+                        <li><strong>City Table:</strong> City_ID, Name, State, Samvidhan_HTML_Content.</li>
+                        <li><strong>Mohalla Table:</strong> Mohalla_ID, City_ID (Foreign Key), Name, Population_Count.</li>
+                        <li><strong>Cabinet Table:</strong> User_ID, Department_Name, Frame_Color, Appointed_By, Is_Active.</li>
+                    </ul>
+                </div>
+                <div>
+                    <ul>
+                        <li><strong>Post Table:</strong> Post_ID, User_ID, Mohalla_ID, Content, Type (Text/Poll/Ad/Announcement), Created_At.</li>
+                        <li><strong>Concern Table:</strong> Concern_ID, User_ID, Mohalla_ID, Image_URL, Description, Status (Open/Resolved/Priority).</li>
+                        <li><strong>Election Table:</strong> Election_ID, Type (City/Mohalla), Phase (Nomination/Prachar/Voting/Result), Start_Date.</li>
+                        <li><strong>Candidate Table:</strong> Candidate_ID, Election_ID, User_ID, Manifesto, Symbol, Vote_Count.</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+
+        <!-- 4. Security & Admin Control Logic -->
+        <div class="glass-card">
+            <h2>4. Security & Admin Workflow</h2>
+            <div class="grid-2">
+                <div>
+                    <h3>Admin Hierarchy Logic</h3>
+                    <ul>
+                        <li><strong>Superuser (You):</strong> Django admin me log in karke nai City aur unke City Admins (Election Commission) create karega.</li>
+                        <li><strong>City Admin (Election Comm.):</strong> Apne login se sirf apni City ka data dekh payega. Ye Django ke <em>Row-Level Security / Multi-tenancy</em> concept se hoga. Kandhla ka admin dusri city ka chunav nahi ched sakta.</li>
+                    </ul>
+                </div>
+                <div>
+                    <h3>Anti-Fraud / Abuse System</h3>
+                    <ul>
+                        <li><strong>Profanity Filter:</strong> Flutter app me post submit hone se pehle local list se word check hoga. Fir Django API bhi regex se check karegi.</li>
+                        <li><strong>Vote Tampering:</strong> Voting table me `User_ID` + `Election_ID` ka ek 'Unique Constraint' laga hoga. Database level par ek user ka dusra vote fail ho jayega, chahe koi hacker app bypass kyu na kar le.</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+
+        <!-- 5. Development Roadmap (Phases) -->
+        <div class="glass-card">
+            <h2>5. Development Roadmap (Kaam Kaise Shuru Hoga?)</h2>
+            <p>Is project ko hum 6 phases me develop karenge taki testing proper ho sake.</p>
+
+            <div class="phase-box">
+                <h4>Phase 1: Backend Foundation & DB Setup (Django)</h4>
+                <p>Sabse pehle PostgreSQL set hoga. Users, City, Mohalla, aur Posts ke models banenge. Admin panel setup hoga aur CRUD operations ki APIs likhi jayengi.</p>
+            </div>
+            
+            <div class="phase-box">
+                <h4>Phase 2: Authentication & Mohalla Assignment (Flutter + Django)</h4>
+                <p>Flutter me UI banana shuru hoga. Google Login integrate hoga, Device ID capture hogi. User profile banegi aur Mohalla selection dropdown live kiya jayega.</p>
+            </div>
+
+            <div class="phase-box">
+                <h4>Phase 3: The Community Feed (Flutter + Firebase)</h4>
+                <p>Text/Photo post karne ka system, Concerns raise karna. Firebase DB integrate karke real-time Likes aur Support system build karna. Cross-mohalla view logic implement karna.</p>
+            </div>
+
+            <div class="phase-box">
+                <h4>Phase 4: The Election Engine (Celery + Django)</h4>
+                <p>Sabse complex hissa. Election API endpoints, Parcha bharne ka form. Celery beat setup karna jo 15 din ki timeline (Nomination -> Prachar -> Achaar Sanhita -> Voting -> Results) ko automatically shift kare.</p>
+            </div>
+
+            <div class="phase-box">
+                <h4>Phase 5: VIP Profiles, Frames & Samvidhan</h4>
+                <p>App UI me 3D rubies, VIP borders, aur tags implement karna. Cabinet mantriyo ko adhikar (privileges) ki APIs authorize karna. Samvidhan (Constitution) ka premium page design karna.</p>
+            </div>
+
+            <div class="phase-box">
+                <h4>Phase 6: Moderation, Ads & Load Testing</h4>
+                <p>3-strike warning system live karna. Admin Ads pin karna. Voting day simulation karke jali traffic bhej kar load testing karna (Redis queue test). Play Store ki policies ke hisab se final review karna.</p>
+            </div>
+        </div>
+
+    </div>
+
+</body>
+</html>
