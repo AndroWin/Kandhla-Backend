@@ -1,0 +1,48 @@
+{% extends "master_control/base.html" %}
+
+{% block pagetitle %}User Data & Moderation{% endblock %}
+
+{% block content %}
+<div class="grid-2">
+    <div>
+        <h2 style="margin-top:0; color:var(--blue);">Users Directory</h2>
+        <input type="text" class="inp" placeholder="Search by name, ID, or phone..." style="margin-bottom:15px;">
+        <table style="width:100%; font-size:0.85rem; text-align:left; border-collapse:collapse;">
+            <tr style="border-bottom:1px solid #334; color:var(--text-m);">
+                <th style="padding:10px 0;">Name</th>
+                <th>Mohalla</th>
+                <th>Cred.</th>
+                <th>Status</th>
+            </tr>
+            <tr style="border-bottom:1px solid #223;">
+                <td style="padding:10px 0;">User A</td>
+                <td>Kandhla North</td>
+                <td>800</td>
+                <td style="color:var(--green);">Active</td>
+            </tr>
+            <tr style="border-bottom:1px solid #223;">
+                <td style="padding:10px 0;">User B</td>
+                <td>Shamli West</td>
+                <td>120</td>
+                <td style="color:var(--red);">Banned</td>
+            </tr>
+        </table>
+    </div>
+
+    <div>
+        <h2 style="margin-top:0; color:var(--red);">Ban / Unban Override</h2>
+        <div class="cd red-br" style="background:rgba(239,68,68,0.05);">
+            <div class="fx-b"><strong style="font-size:1.1rem;">User: Spammer123</strong><span class="txt-s">Strikes: 3</span></div>
+            <div class="inp" style="margin:15px 0;">Reason: Continuous fake news.</div>
+            <div class="fx" style="gap:10px;">
+                <button class="btn" style="background:var(--red);">Perm-Ban</button>
+                <button class="btn" style="background:var(--green);">Revoke Bans</button>
+            </div>
+        </div>
+        <div class="dtl" style="max-width:100%;">
+            <h4>Manual Ban/Unban System</h4>
+            <ul><li>Direct action profile card. Overrides the 3-strike system. Forces Firebase to drop the user's active session.</li></ul>
+        </div>
+    </div>
+</div>
+{% endblock %}

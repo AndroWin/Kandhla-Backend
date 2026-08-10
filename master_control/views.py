@@ -18,8 +18,19 @@ class SuperuserRequiredMixin(UserPassesTestMixin):
 
 
 class MasterDashboardView(SuperuserRequiredMixin, TemplateView):
-    """Serves the main SPA HTML file."""
     template_name = 'master_control/index.html'
+
+class UsersView(SuperuserRequiredMixin, TemplateView):
+    template_name = 'master_control/users.html'
+
+class ContentView(SuperuserRequiredMixin, TemplateView):
+    template_name = 'master_control/content.html'
+
+class AdsView(SuperuserRequiredMixin, TemplateView):
+    template_name = 'master_control/ads.html'
+
+class ElectionsView(SuperuserRequiredMixin, TemplateView):
+    template_name = 'master_control/elections.html'
 
 
 class DashboardStatsAPI(SuperuserRequiredMixin, View):
