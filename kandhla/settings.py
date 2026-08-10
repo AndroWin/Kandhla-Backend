@@ -144,6 +144,10 @@ JAZZMIN_SETTINGS = {
     "show_ui_builder": False,
     "changeform_format": "horizontal_tabs",
     "changeform_format_overrides": {"accounts.user": "collapsible", "auth.group": "vertical_tabs"},
+    
+    # Hide confusing technical apps for non-tech users
+    "hide_apps": ["django_celery_beat", "auth"],
+    "hide_models": ["auth.Group", "auth.User"],
 }
 
 JAZZMIN_UI_TWEAKS = {

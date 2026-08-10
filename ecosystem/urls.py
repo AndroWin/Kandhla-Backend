@@ -13,6 +13,7 @@ from ecosystem.views import (
     CabinetListView,
     SamvidhanView,
     EngineeredByView,
+    AdminDashboardStatsView,
 )
 
 app_name = 'ecosystem'
@@ -30,9 +31,10 @@ urlpatterns = [
     # Cabinet
     path('cabinet/', CabinetListView.as_view(), name='cabinet-list'),
 
-    # Samvidhan (Constitution)
+    # Samvidhan    # System Info
     path('system/samvidhan/<uuid:city_id>/', SamvidhanView.as_view(), name='samvidhan'),
-
-    # Engineered By (Dev Team)
     path('team/engineered-by/', EngineeredByView.as_view(), name='engineered-by'),
+    
+    # Custom Admin Dashboard API
+    path('admin/stats/', AdminDashboardStatsView.as_view(), name='admin-stats'),
 ]

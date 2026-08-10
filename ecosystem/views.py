@@ -143,3 +143,37 @@ class EngineeredByView(APIView):
             },
             status=status.HTTP_200_OK,
         )
+
+
+from rest_framework.permissions import IsAdminUser
+from django.contrib.auth import get_user_model
+from content.models import Post
+
+User = get_user_model()
+
+class AdminDashboardStatsView(APIView):
+    """
+    Premium Admin Dashboard API - Returns stats for the Jazzmin custom UI.
+    """
+    permission_classes = [IsAdminUser]
+
+    def get(self, request):
+        total_users = User.objects.count()
+        total_mohallas = Mohalla.objects.count()
+        total_posts = Post.objects.count()
+        total_revenue = "$12,500"  # Placeholder for premium feel
+        
+        # Fake chart data for the demo
+        monthly_growth = [120, 200, 150, 400, 300, 500, 800, 1200, 1500, 1800, 2100, 2300]
+        months = ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"]
+
+        return Response({
+            "total_users": total_users,
+            "total_mohallas": total_mohallas,
+            "total_posts": total_posts,
+            "total_revenue": total_revenue,
+            "chart": {
+                "labels": months,
+                "data": monthly_growth
+            }
+        })
