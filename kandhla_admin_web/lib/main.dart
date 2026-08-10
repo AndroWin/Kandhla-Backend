@@ -1,4 +1,8 @@
 import 'package:flutter/material.dart';
+import 'screens/dashboard_layout.dart';
+import 'screens/cities_screen.dart';
+import 'screens/users_screen.dart';
+import 'screens/mohallas_screen.dart';
 
 void main() {
   runApp(const AdminWebApp());
@@ -23,7 +27,10 @@ class AdminWebApp extends StatelessWidget {
       initialRoute: '/login',
       routes: {
         '/login': (context) => const LoginScreen(),
-        '/dashboard': (context) => const DashboardScreen(),
+        '/dashboard': (context) => const DashboardLayout(title: 'Dashboard / Overview', child: Center(child: Text('Welcome to the Dashboard'))),
+        '/cities': (context) => const CitiesScreen(),
+        '/users': (context) => const UsersScreen(),
+        '/mohallas': (context) => const MohallasScreen(),
       },
     );
   }
@@ -120,112 +127,6 @@ class LoginScreen extends StatelessWidget {
             ],
           ),
         ),
-      ),
-    );
-  }
-}
-
-class DashboardScreen extends StatelessWidget {
-  const DashboardScreen({super.key});
-
-  @override
-  Widget build(BuildContext context) {
-    return Scaffold(
-      body: Row(
-        children: [
-          // Sidebar
-          Container(
-            width: 250,
-            color: const Color(0xFF0F172A),
-            child: Column(
-              children: [
-                const Padding(
-                  padding: EdgeInsets.all(24.0),
-                  child: Text(
-                    'MASTER CONTROL',
-                    style: TextStyle(
-                      fontSize: 18,
-                      fontWeight: FontWeight.bold,
-                      color: Color(0xFFFBBF24),
-                    ),
-                  ),
-                ),
-                ListTile(
-                  leading: const Icon(Icons.dashboard, color: Colors.white),
-                  title: const Text('Dashboard', style: TextStyle(color: Colors.white)),
-                  onTap: () {},
-                ),
-                ListTile(
-                  leading: const Icon(Icons.people, color: Colors.white70),
-                  title: const Text('Users', style: TextStyle(color: Colors.white70)),
-                  onTap: () {},
-                ),
-                ListTile(
-                  leading: const Icon(Icons.location_city, color: Colors.white70),
-                  title: const Text('Mohallas', style: TextStyle(color: Colors.white70)),
-                  onTap: () {},
-                ),
-                ListTile(
-                  leading: const Icon(Icons.campaign, color: Colors.white70),
-                  title: const Text('Ads Network', style: TextStyle(color: Colors.white70)),
-                  onTap: () {},
-                ),
-                ListTile(
-                  leading: const Icon(Icons.how_to_vote, color: Colors.white70),
-                  title: const Text('Elections', style: TextStyle(color: Colors.white70)),
-                  onTap: () {},
-                ),
-                const Spacer(),
-                ListTile(
-                  leading: const Icon(Icons.logout, color: Colors.redAccent),
-                  title: const Text('Logout', style: TextStyle(color: Colors.redAccent)),
-                  onTap: () {
-                    Navigator.pushReplacementNamed(context, '/login');
-                  },
-                ),
-              ],
-            ),
-          ),
-          // Main Content Area
-          Expanded(
-            child: Column(
-              children: [
-                // Topbar
-                Container(
-                  height: 60,
-                  padding: const EdgeInsets.symmetric(horizontal: 24),
-                  decoration: const BoxDecoration(
-                    color: Color(0xFF0A0F1C),
-                    border: Border(bottom: BorderSide(color: Colors.white10)),
-                  ),
-                  child: const Row(
-                    children: [
-                      Text('Dashboard / Overview', style: TextStyle(color: Colors.white70)),
-                      Spacer(),
-                      CircleAvatar(
-                        backgroundColor: Colors.white10,
-                        child: Icon(Icons.person, color: Colors.white),
-                      ),
-                    ],
-                  ),
-                ),
-                // Content
-                Expanded(
-                  child: Padding(
-                    padding: const EdgeInsets.all(24.0),
-                    child: Align(
-                      alignment: Alignment.topLeft,
-                      child: Text(
-                        'Welcome to the new Flutter Web Admin Panel!',
-                        style: Theme.of(context).textTheme.headlineSmall,
-                      ),
-                    ),
-                  ),
-                ),
-              ],
-            ),
-          ),
-        ],
       ),
     );
   }
