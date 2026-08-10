@@ -35,6 +35,7 @@ if RENDER_EXTERNAL_HOSTNAME:
 # APPLICATION DEFINITION
 # ============================================================
 INSTALLED_APPS = [
+    'jazzmin',  # Must be first
     # Django core apps
     'django.contrib.admin',
     'django.contrib.auth',
@@ -91,6 +92,91 @@ TEMPLATES = [
         },
     },
 ]
+
+# ============================================================
+# JAZZMIN ADMIN UI SETTINGS
+# ============================================================
+JAZZMIN_SETTINGS = {
+    # title of the window (Will default to current_admin_site.site_title if absent or None)
+    "site_title": "Republic of Kandhla Admin",
+
+    # Title on the login screen (19 chars max) (defaults to current_admin_site.site_header if absent or None)
+    "site_header": "Kandhla Backend",
+
+    # Title on the brand (19 chars max) (defaults to current_admin_site.site_header if absent or None)
+    "site_brand": "Kandhla Admin",
+
+    # Welcome text on the login screen
+    "welcome_sign": "Welcome to the Supreme Minister Dashboard",
+
+    # Copyright on the footer
+    "copyright": "Republic of Kandhla Ltd",
+
+    # The model admin to search from the search bar, search bar omitted if excluded
+    "search_model": ["accounts.User"],
+
+    # Field name on user model that contains avatar ImageField/URLField/Charfield or a callable that receives the user
+    "user_avatar": "avatar_url",
+
+    # Whether to display the side menu
+    "show_sidebar": True,
+
+    # Whether to aut expand the menu
+    "navigation_expanded": True,
+
+    # Custom icons for side menu apps/models See https://fontawesome.com/icons?d=gallery&m=free&v=5.0.0,5.1.0,5.1.1,5.1.2,5.2.0,5.3.0,5.3.1,5.4.0,5.4.1,5.4.2,5.13.0,5.12.0,5.11.2,5.11.1,5.10.0,5.9.0,5.8.2,5.8.1,5.7.2,5.7.1,5.7.0,5.6.3,5.5.0,5.4.2
+    # for the full list of 5.13.0 free icon classes
+    "icons": {
+        "auth": "fas fa-users-cog",
+        "accounts.user": "fas fa-user",
+        "ecosystem.city": "fas fa-city",
+        "ecosystem.mohalla": "fas fa-map-marker-alt",
+        "content.post": "fas fa-file-alt",
+        "election.election": "fas fa-vote-yea",
+    },
+    
+    "default_icon_parents": "fas fa-chevron-circle-right",
+    "default_icon_children": "fas fa-circle",
+    
+    "related_modal_active": False,
+    "custom_css": None,
+    "custom_js": None,
+    "show_ui_builder": False,
+    "changeform_format": "horizontal_tabs",
+    "changeform_format_overrides": {"accounts.user": "collapsible", "auth.group": "vertical_tabs"},
+}
+
+JAZZMIN_UI_TWEAKS = {
+    "navbar_small_text": False,
+    "footer_small_text": False,
+    "body_small_text": False,
+    "brand_small_text": False,
+    "brand_colour": "navbar-dark",
+    "accent": "accent-primary",
+    "navbar": "navbar-white navbar-light",
+    "no_navbar_border": False,
+    "navbar_fixed": False,
+    "layout_boxed": False,
+    "footer_fixed": False,
+    "sidebar_fixed": False,
+    "sidebar": "sidebar-dark-primary",
+    "sidebar_nav_small_text": False,
+    "sidebar_disable_expand": False,
+    "sidebar_nav_child_indent": False,
+    "sidebar_nav_compact_style": False,
+    "sidebar_nav_legacy_style": False,
+    "sidebar_nav_flat_style": False,
+    "theme": "lumen",
+    "dark_mode_theme": "darkly",
+    "button_classes": {
+        "primary": "btn-outline-primary",
+        "secondary": "btn-outline-secondary",
+        "info": "btn-outline-info",
+        "warning": "btn-outline-warning",
+        "danger": "btn-outline-danger",
+        "success": "btn-outline-success"
+    }
+}
 
 WSGI_APPLICATION = 'kandhla.wsgi.application'
 
