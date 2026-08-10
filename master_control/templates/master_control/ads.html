@@ -16,7 +16,7 @@
             + Upload Banner Image
         </div>
         
-        <button class="btn" style="width:100%; margin-top:20px; background:var(--gold); color:#000; padding:12px;">Pin Ad to Feed</button>
+        <button class="btn" style="width:100%; margin-top:20px; background:var(--gold); color:#000; padding:12px;" onclick="pushAd()">Pin Ad to Feed</button>
         
         <div class="dtl" style="max-width:100%;">
             <h4>Ad Publisher</h4>
@@ -51,4 +51,27 @@
         </div>
     </div>
 </div>
+{% endblock %}
+
+{% block scripts %}
+<script>
+    async function pushAd() {
+        if (!confirm("Push ad to selected city feed?")) return;
+        try {
+            const res = await fetch('/dashboard/api/ads/', {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify({})
+            });
+            const data = await res.json();
+            if (data.success) {
+                alert(data.message);
+            } else {
+                alert("Error: " + data.error);
+            }
+        } catch (e) {
+            alert("Network Error");
+        }
+    }
+</script>
 {% endblock %}

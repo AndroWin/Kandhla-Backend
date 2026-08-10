@@ -7,15 +7,15 @@
     <div>
         <h2 style="margin-top:0; color:var(--blue);">Declare Election</h2>
         <label class="txt-s">Type</label>
-        <select class="inp" style="margin-bottom:15px;">
-            <option>City Level (Supreme)</option>
-            <option>Mohalla Level</option>
+        <select id="ec-type" class="inp" style="margin-bottom:15px;">
+            <option value="CITY">City Level (Supreme)</option>
+            <option value="MOHALLA">Mohalla Level</option>
         </select>
         
         <label class="txt-s" style="display:block;">Start Date</label>
         <input type="date" class="inp" style="margin-bottom:15px;">
         
-        <button class="btn" style="width:100%; padding:12px;">Initialize Cycle</button>
+        <button class="btn" style="width:100%; padding:12px;" onclick="declareElection()">Initialize Cycle</button>
         
         <div class="dtl" style="max-width:100%;">
             <h4>EC Timeline Planner</h4>
@@ -45,4 +45,28 @@
         </div>
     </div>
 </div>
+{% endblock %}
+
+{% block scripts %}
+<script>
+    async function declareElection() {
+        const type = document.getElementById('ec-type').value;
+        if (!confirm(`Initialize ${type} election cycle?`)) return;
+        try {
+            const res = await fetch('/dashboard/api/elections/', {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify({ level: type })
+            });
+            const data = await res.json();
+            if (data.success) {
+                alert(data.message);
+            } else {
+                alert("Error: " + data.error);
+            }
+        } catch (e) {
+            alert("Network Error");
+        }
+    }
+</script>
 {% endblock %}

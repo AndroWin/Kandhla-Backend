@@ -11,12 +11,8 @@
             <option>Flagged Only</option>
         </select>
         
-        <div class="cd" style="border-color:var(--red);">
-            <div class="fx-b" style="margin-bottom:10px;">
-                <span class="txt-s">Mohalla X • User A</span>
-                <button class="btn" style="background:var(--red); padding:5px 12px;">Delete</button>
-            </div>
-            <div style="font-size:0.95rem;">Check out this scam link...</div>
+        <div id="posts-feed">
+            <div class="txt-s">Loading posts...</div>
         </div>
         
         <div class="dtl" style="max-width:100%;">
@@ -46,4 +42,53 @@
         </div>
     </div>
 </div>
+{% endblock %}
+
+{% block scripts %}
+<script>
+    async function loadPosts() {
+        try {
+            const res = await fetch('/dashboard/api/content/');
+            const data = await res.json();
+            if (data.success) {
+                const feed = document.getElementById('posts-feed');
+                feed.innerHTML = '';
+                data.posts.forEach(p => {
+                    feed.innerHTML += `
+                        <div class="cd" style="border-color:var(--red);">
+                            <div class="fx-b" style="margin-bottom:10px;">
+                                <span class="txt-s">${p.author}</span>
+                                <button class="btn" style="background:var(--red); padding:5px 12px;" onclick="deletePost('${p.id}')">Delete</button>
+                            </div>
+                            <div style="font-size:0.95rem;">${p.content}</div>
+                        </div>
+                    `;
+                });
+            }
+        } catch (e) {
+            console.error('Failed to load posts', e);
+        }
+    }
+
+    async function deletePost(postId) {
+        if (!confirm("Delete this post permanently?")) return;
+        try {
+            const res = await fetch('/dashboard/api/content/', {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify({ post_id: postId })
+            });
+            const data = await res.json();
+            if (data.success) {
+                loadPosts();
+            } else {
+                alert("Error: " + data.error);
+            }
+        } catch (e) {
+            alert("Network Error");
+        }
+    }
+
+    window.onload = loadPosts;
+</script>
 {% endblock %}
