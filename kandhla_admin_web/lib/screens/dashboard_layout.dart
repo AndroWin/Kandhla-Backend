@@ -50,7 +50,23 @@ class DashboardLayout extends StatelessWidget {
                 ListTile(
                   leading: const Icon(Icons.campaign, color: Colors.white70),
                   title: const Text('Ads Network', style: TextStyle(color: Colors.white70)),
-                  onTap: () {},
+                  onTap: () {
+                    Navigator.pushReplacementNamed(context, '/ads');
+                  },
+                ),
+                ListTile(
+                  leading: const Icon(Icons.article, color: Colors.white70),
+                  title: const Text('Content Feed', style: TextStyle(color: Colors.white70)),
+                  onTap: () {
+                    Navigator.pushReplacementNamed(context, '/content');
+                  },
+                ),
+                ListTile(
+                  leading: const Icon(Icons.how_to_vote, color: Colors.white70),
+                  title: const Text('Elections (EC)', style: TextStyle(color: Colors.white70)),
+                  onTap: () {
+                    Navigator.pushReplacementNamed(context, '/elections');
+                  },
                 ),
                 ListTile(
                   leading: const Icon(Icons.location_city, color: Colors.white),

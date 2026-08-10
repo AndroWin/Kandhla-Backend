@@ -3,6 +3,9 @@ import 'screens/dashboard_layout.dart';
 import 'screens/cities_screen.dart';
 import 'screens/users_screen.dart';
 import 'screens/mohallas_screen.dart';
+import 'screens/ads_screen.dart';
+import 'screens/content_screen.dart';
+import 'screens/elections_screen.dart';
 
 void main() {
   runApp(const AdminWebApp());
@@ -31,6 +34,9 @@ class AdminWebApp extends StatelessWidget {
         '/cities': (context) => const CitiesScreen(),
         '/users': (context) => const UsersScreen(),
         '/mohallas': (context) => const MohallasScreen(),
+        '/ads': (context) => const AdsScreen(),
+        '/content': (context) => const ContentScreen(),
+        '/elections': (context) => const ElectionsScreen(),
       },
     );
   }

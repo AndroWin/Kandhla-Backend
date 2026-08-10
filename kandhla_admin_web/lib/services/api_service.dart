@@ -56,4 +56,58 @@ class ApiService {
     }
     return {'success': false, 'error': 'Failed to update ban status'};
   }
+
+  static Future<Map<String, dynamic>> getPosts() async {
+    try {
+      final response = await http.get(Uri.parse('$baseUrl/content/'));
+      if (response.statusCode == 200) {
+        return json.decode(response.body);
+      }
+    } catch (e) {
+      print('Error fetching posts: $e');
+    }
+    return {'success': false, 'error': 'Failed to load posts'};
+  }
+
+  static Future<Map<String, dynamic>> deletePost(String postId) async {
+    try {
+      final response = await http.post(
+        Uri.parse('$baseUrl/content/'),
+        headers: {'Content-Type': 'application/json'},
+        body: json.encode({'post_id': postId}),
+      );
+      return json.decode(response.body);
+    } catch (e) {
+      print('Error deleting post: $e');
+    }
+    return {'success': false, 'error': 'Failed to delete post'};
+  }
+
+  static Future<Map<String, dynamic>> pushAd(Map<String, dynamic> adData) async {
+    try {
+      final response = await http.post(
+        Uri.parse('$baseUrl/ads/'),
+        headers: {'Content-Type': 'application/json'},
+        body: json.encode(adData),
+      );
+      return json.decode(response.body);
+    } catch (e) {
+      print('Error pushing ad: $e');
+    }
+    return {'success': false, 'error': 'Failed to push ad'};
+  }
+
+  static Future<Map<String, dynamic>> declareElection(String level) async {
+    try {
+      final response = await http.post(
+        Uri.parse('$baseUrl/elections/'),
+        headers: {'Content-Type': 'application/json'},
+        body: json.encode({'level': level}),
+      );
+      return json.decode(response.body);
+    } catch (e) {
+      print('Error initializing election: $e');
+    }
+    return {'success': false, 'error': 'Failed to initialize election'};
+  }
 }
