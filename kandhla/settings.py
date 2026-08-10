@@ -50,6 +50,7 @@ INSTALLED_APPS = [
     'django_celery_beat',
 
     # Project apps - Republic of Kandhla
+    'master_control.apps.MasterControlConfig',
     'accounts.apps.AccountsConfig',
     'ecosystem.apps.EcosystemConfig',
     'content.apps.ContentConfig',

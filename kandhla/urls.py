@@ -23,6 +23,9 @@ urlpatterns = [
     # Django Admin Panel
     path('admin/', admin.site.urls),
 
+    # Custom Ecosystem Dashboard
+    path('dashboard/', include('master_control.urls')),
+
     # API Endpoints - App wise routing
     path('api/auth/', include('accounts.urls')),
     path('api/', include('ecosystem.urls')),
