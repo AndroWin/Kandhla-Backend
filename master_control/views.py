@@ -1,6 +1,4 @@
 import json
-from django.shortcuts import render
-from django.views.generic import TemplateView
 from django.http import JsonResponse
 from django.views import View
 from django.contrib.auth.mixins import UserPassesTestMixin
@@ -15,22 +13,6 @@ class SuperuserRequiredMixin(UserPassesTestMixin):
     """Ensure only superusers can access this dashboard."""
     def test_func(self):
         return self.request.user.is_authenticated and self.request.user.is_superuser
-
-
-class MasterDashboardView(SuperuserRequiredMixin, TemplateView):
-    template_name = 'master_control/index.html'
-
-class UsersView(SuperuserRequiredMixin, TemplateView):
-    template_name = 'master_control/users.html'
-
-class ContentView(SuperuserRequiredMixin, TemplateView):
-    template_name = 'master_control/content.html'
-
-class AdsView(SuperuserRequiredMixin, TemplateView):
-    template_name = 'master_control/ads.html'
-
-class ElectionsView(SuperuserRequiredMixin, TemplateView):
-    template_name = 'master_control/elections.html'
 
 
 class DashboardStatsAPI(SuperuserRequiredMixin, View):
